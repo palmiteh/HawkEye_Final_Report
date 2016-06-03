@@ -1,0 +1,104 @@
+\documentclass[letterpaper,10pt,titlepage]{IEEEtran}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{alltt}
+\usepackage{float}
+\usepackage{color}
+\usepackage{url}
+\usepackage{listings}
+\lstset{ 
+   language=C++,                % choose the language of the code
+   basicstyle=\small,        % the size of the fonts that are used for the code
+   keywordstyle=\color{blue},
+   stringstyle=\color{red},
+   commentstyle=\color{green},
+   numbers=left,                   % where to put the line-numbers
+   numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+   stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+   numbersep=5pt,                  % how far the line-numbers are from the code
+   backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+   showspaces=false,               % show spaces adding particular underscores
+   showstringspaces=false,         % underline spaces within strings
+   showtabs=false,                 % show tabs within strings adding particular underscores
+   frame=single,           % adds a frame around the code
+   tabsize=2,          % sets default tabsize to 2 spaces
+   captionpos=b,           % sets the caption-position to bottom
+   breaklines=true,        % sets automatic line breaking
+   breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+   escapeinside={\%*}{*)}          % if you want to add a comment within your code
+   }
+   \usepackage{balance}
+   \usepackage[TABBOTCAP, tight]{subfigure}
+   \usepackage{enumitem}
+   \usepackage{pstricks, pst-node}
+
+   \usepackage{geometry}
+   \usepackage{longtable,hyperref}
+   \geometry{textheight=8.5in, textwidth=6in, margin=0.75in}
+
+   %\graphicspath{ /nfs/stak/students/p/palmiteh/CS461/Winter_Midterm/ }
+ 
+   \renewcommand*\rmdefault{cmr}
+
+   \newcommand{\cred}[1]{{\color{red}#1}}
+   \newcommand{\cblue}[1]{{\color{blue}#1}}
+   \newcommand{\itab}[1]{\hspace{4em}\rlap{#1}}
+
+
+   \title{Final Report}
+   \author{Hailey Palmiter, Scott Griffy, and Ryan Kitchen}
+   \date{\today}
+
+   %% The following metadata will show up in the PDF properties
+   \hypersetup{
+      colorlinks = true,
+      urlcolor = black,
+      pdfauthor = {Palmiter, Griffy, Kitchen},
+      pdftitle = {HawkEye Final Report},
+      pdfsubject = {CS463},
+      pdfpagemode = UseNone
+   }
+   \begin{document}
+   \begin{titlepage}
+      \centering
+      \vfill
+      {\bfseries\Large
+         HawkEye Final Report \\
+         CS 463 - Senior Capstone\\
+         \vskip2cm
+         June 10th, 2016\\
+         \vskip2cm
+         Group 4 - HawkEye Crew\\ 
+         \vskip1cm
+         Hailey Palmiter\\
+         \vskip1cm
+         Scott Griffy\\
+         \vskip1cm
+         Ryan Kitchen\\
+    
+      }
+      \vfill
+      \vskip2cm
+      \begin{abstract}
+      This document is a release progress report that covers a brief introduction of our senior project, our current progress, problems that have impeded our progress, and the results that have been gathered. It also describes what is left to do to increase our projects performance and/or create more concrete testing of our software system before it is presented at the Engineering Expo. It also describes our stretch goals may complete before then as well and some detail about our planning of our demo for expo. This report includes a few interesting pieces of code and a description of what this code does to improve or enhance our system. It is constructed using the IEEEtran style guidelines.
+      \end{abstract}
+      \vfill
+   \end{titlepage}
+   
+   \onecolumn
+   \tableofcontents
+   \newpage
+   \bigskip
+   \section{Introduction}
+   Rockwell Collins, our project sponsor, designs video vision systems for pilots to use during flight. Pilots often use these enhanced image systems to help them see better in rough weather conditions, and to generally assist during different flight operations, such as landing. An example of this functionality could be overlaying a pilot's view with graphics to help the pilot locate a landing strip in a storm, or automatically turning a night-vision camera off when it is not needed to save power. The hardware used for this system must limit the power consumption it pulls from the aircraft, and also must be lightweight in order to have the least affect on the airplane. Even an extra five pounds added to the plane during a year can add up to thousands of dollars in fuel costs. In order to provide pilots with this specific low power, low weight, and enhanced image processing, Rockwell Collins develops software on Field Programmable Gate Arrays (FPGAs). This piece of hardware makes the code very complex and very costly to develop. New vision enhancements can take weeks or months to develop on the FPGAs. The FPGAs are currently Rockwell Collins only option that meets the requirements needed to create practical systems that pilots can use effectively.\\
+\par
+   Our goal is to provide a proof of concept for an alternative to Rockwell Collins' FPGAs. It must meet the performance metrics, provide faster implementation time, and reduce the cost of production. Specifically, we are designing a proof of concept using single board computers (SBCs). Single board computers differ from FPGAs because they have a standardized execution environment, which allows simplified code to be executed on it, reducing the development time. Single board computers also use low cost hardware and don't consume much power. If we can prove that the video quality produced by the SBCs is adequate for pilots to use, they will meet all the requirements needed to develop a practical vision system on. In the air, FPGAs often take feeds from multiple cameras and run a lot of processing algorithms on those images. In order to be effective, the SBCs should also be able to handle this operation. Our project aims to test and measure the capabilities of a single board computer by delivering a multiple-stream video display that has been processed to a high degree. We believe the best candidate for this is to use NVIDIA's single board computer, the Jetson TX1. Our goal is to fully test the Jetson TX1's ability to provide enhanced imaging. This proof of concept will result in measurements that will help Rockwell Collins determine the practicality of using single board computers for their vision systems.
+   
+   
+   
+\end{document}
+   
