@@ -90,7 +90,7 @@
       \vfill
       \vskip2cm
       \begin{abstract} %Needs improvement%
-      This document is a final report constructed using the IEEEtran style guidelines. The report provides an introduction to our senior project, a project description, and a personal overview from each member of the team about what they learned over the course of the project. The report includes our original requirements document, design document, and technological review with an added discussion about each document. This discussion describes how the project had changed over the course of the year in comparison to how it was perceived during the planning process. Also included is our weekly blog posts that had been generated over the course of the year to keep our TA and our sponsors up to date with our progress, and our final poster that was used at the Engineering Expo. Appendix 1 covers essential code listings and Appendix 2 displays the hardware we were able to interact with and a few output images from our vision system. 
+	  \input{sections/abstract.tex}
       \end{abstract}
       \vfill
    \end{titlepage}
@@ -100,19 +100,13 @@
    \newpage
    \bigskip
 \IEEEraisesectionheading{\section{Introduction}\label{sec:introduction}}
-   Rockwell Collins, our project sponsor, designs video vision systems for pilots to use during flight. Pilots often use these enhanced image systems to help them see better in rough weather conditions, and to generally assist during different flight operations, such as landing. An example of this functionality could be overlaying a pilot's view with graphics to help the pilot locate a landing strip in a storm, or automatically turning a night-vision camera off when it is not needed to save power. The hardware used for this system must limit the power consumption it pulls from the aircraft, and also must be lightweight in order to have the least affect on the airplane. Even an extra five pounds added to the plane during a year can add up to thousands of dollars in fuel costs. In order to provide pilots with this specific low power, low weight, and enhanced image processing, Rockwell Collins develops software on Field Programmable Gate Arrays (FPGAs). This piece of hardware makes the code very complex and very costly to develop. New vision enhancements can take weeks or months to develop on the FPGAs. The FPGAs are currently Rockwell Collins only option that meets the requirements needed to create practical systems that pilots can use effectively.\\
-\par
-Our goal is to provide a proof of concept for an alternative to Rockwell Collins' FPGAs. It must meet the performance metrics, provide faster implementation time, and reduce the cost of production. Specifically, we are designing a proof of concept using single board computers (SBCs). Single board computers differ from FPGAs because they have a standardized execution environment, which allows simplified code to be executed on it, reducing the development time. Single board computers also use low cost hardware and don't consume much power. If we can prove that the video quality produced by the SBCs is adequate for pilots to use, they will meet all the requirements needed to develop a practical vision system on. In the air, FPGAs often take feeds from multiple cameras and run a lot of processing algorithms on those images. In order to be effective, the SBCs should also be able to handle this operation. Our project aims to test and measure the capabilities of a single board computer by delivering a multiple-stream video display that has been processed to a high degree. We believe the best candidate for this is to use NVIDIA's single board computer, the Jetson TX1. Our goal is to fully test the Jetson TX1's ability to provide enhanced imaging. This proof of concept will result in measurements that will help Rockwell Collins determine the practicality of using single board computers for their vision systems.\\
-\par
-   %About clients roles and who they were, team members and our roles%
-
-
+\input{sections/introduction.tex}
 \section{Original Requirements Document}
-   \input{documents/Requirements_Doc.tex}
+\input{documents/Requirements_Doc.tex}
 
 \section{Requirements Document Changes}
 %Chart of changes - What new requirements were added? What existing requirements were changed? What existing requirements were deleted? Why?%
-	\subsection{Final Gantt Chart}
+\subsection{Final Gantt Chart}
 
 \section{Design Document}
   \input{documents/Design_Doc.tex}

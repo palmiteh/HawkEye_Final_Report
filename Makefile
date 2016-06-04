@@ -59,5 +59,6 @@ clean:
 .PHONY: all show clean ps pdf showps
 
 move:
-	chmod a+r BetaReport.pdf
-	cp BetaReport.pdf ~/public_html/
+	chmod a+r *.pdf
+	cp *.pdf ~/public_html/
+	chmod a+r ~/public_html/*.pdf
