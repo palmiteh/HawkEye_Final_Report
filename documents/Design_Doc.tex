@@ -7,7 +7,7 @@ HawkEye Crew to determine if the Nvidia Jetson TK1 or other off the shelf single
 high enough performance to replace FPGA-based video processing systems currently used by Rockwell
 Collins.\\
 \subsubsection{Purpose}
-This software description document will provide Hawkeyed Crew with a road map to complete
+This software description document will provide HawkEye Crew with a road map to complete
 development of the software and fulfill the requirements in our Software Requirements Specification.
 This document explains how the system is going to work, who is going to use it, and how it is meant to
 be used.\\
@@ -26,7 +26,7 @@ Design Descriptions. IEEE Computer Society, 2009
 	\item [FPGA] Field-programmable gate array
 	\item [USB] Universal serial bus
 	\item [PoC] Proof of concept
-	\item [UML] Unifed Modeling Language
+	\item [UML] Unified Modeling Language
 	\item [DFD] Data Flow Diagram: Shows how data moves between different components in the system
 	\item [ER Diagram] Entity Relationship Diagram: Shows how different data structures within the software are connected to each other
 	\item [SDD] Software Design Description
@@ -39,7 +39,7 @@ Design Descriptions. IEEE Computer Society, 2009
 
 \subsection{Conceptual Model for Software Description}
 \subsubsection{Software Design in Context}
-For the Hawkeyed Video Processing System, we will be using a functional design method. Our
+For the HawkEye Video Processing System, we will be using a functional design method. Our
 system is designed to be modular and have standardized interfaces, so we will be able to develop new
 features and drop them in without modifying existing code. The reasoning for using a functional design
 rather than object oriented is because our software is focused on processing individual video frames in
@@ -101,16 +101,61 @@ how the design is compliant with the SRS. Each one provides details crucial to u
 design works and is a reference for implementation.\\
 
 \begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-\item \textbf{Context viewpoint:}This viewpoint shows the different potential users of the software and how they wouldinteract with our system.\\Design Languages: Use Case Diagram\item \textbf{Structure viewpoint:}This viewpoint shows how the streaming video flows through the system, and identifies theinternal and external data connection points in the system. This viewpoint also shows thecomponents of the system which enable connection of cameras via USB as per the SRS.\\Design Languages: Data Flow Diagram\item \textbf{Interaction viewpoint:}This viewpoint shows the order of operations on processing a video frame, as well as howthe timing is integrated to meet the performance benchmarking requirement.\\Design Languages: UML Sequence Diagram\item \textbf{Information viewpoint:}This viewpoint details how the modular video processing system determines the order ofoperations for the various elements and algorithms it can create. It shows how the systemmeets the requirement for modularity and the capability to use multiple input and outputdevices.\\Design Languages: Entity Relationship Diagram\item \textbf{State Dynamics Viewpoint:}While the algorithm implementations in our design are stateless, the system itself is not.This viewpoint shows the transitions between different states and provides a road map fordifferent states which will need to be individually tested.\\Design Languages: UML State Transition Diagram
+\item \textbf{Context viewpoint:}
+This viewpoint shows the different potential users of the software and how they would
+interact with our system.\\
+Design Languages: Use Case Diagram
+\item \textbf{Structure viewpoint:}
+This viewpoint shows how the streaming video flows through the system, and identifies the
+internal and external data connection points in the system. This viewpoint also shows the
+components of the system which enable connection of cameras via USB as per the SRS.\\
+Design Languages: Data Flow Diagram
+\item \textbf{Interaction viewpoint:}
+This viewpoint shows the order of operations on processing a video frame, as well as how
+the timing is integrated to meet the performance benchmarking requirement.\\
+Design Languages: UML Sequence Diagram
+\item \textbf{Information viewpoint:}
+This viewpoint details how the modular video processing system determines the order of
+operations for the various elements and algorithms it can create. It shows how the system
+meets the requirement for modularity and the capability to use multiple input and output
+devices.\\
+Design Languages: Entity Relationship Diagram
+\item \textbf{State Dynamics Viewpoint:}
+While the algorithm implementations in our design are stateless, the system itself is not.
+This viewpoint shows the transitions between different states and provides a road map for
+different states which will need to be individually tested.\\
+Design Languages: UML State Transition Diagram
 \end{enumerate}
 
 \subsection{Design Viewpoints}
 \subsubsection{Context Viewpoint}
 
 	\paragraph{Users and Design Concerns}
-	The design features in this document are chosen to create value for several differentkinds of users and stakeholders. These users interact with the software in different ways.\\
+	The design features in this document are chosen to create value for several different
+kinds of users and stakeholders. These users interact with the software in different ways.\\
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-    	\item \textbf{Pilot:}	Our intended user will be a pilot of a manned or unmanned aerial vehicle. This software	is designed to provide increased and extensible functionality for onboard camera	systems. Because our product is a proof of concept, there won?t be a real pilot, but the	pilot has been included as a user because the application of this design is to create	better equipment for pilot use. This pilot will be ?using? our product and needs the	video stream to meet the requirements outlined in the SRS.	\item \textbf{Distributor:}	Rockwell Collins is the sponsor and primary stakeholder in this project. They will	evaluate the product and decide where to use it. They will also decide the feasibility of	using this design in production and whether continuing to use single board computers	for real-time video processing is a good idea.	\item \textbf{Implementer:}	The implementer has to set up the simple vision system on their given hardware. Our	proof of concept should give some notion as to how to do this and also the feasibility	and easiness of it. The concepts demonstrated in this design document can be used on	different hardware, not just the NVIDIA Jetson.	\item \textbf{Algorithm Designer:}	The algorithm designer interacts with our software in different ways than the end user	and implementer. This user will create custom modules and link them together with our	easy to use configuration system. This configuration should serve as a design for other	systems.\\
+    	\item \textbf{Pilot:}
+	Our intended user will be a pilot of a manned or unmanned aerial vehicle. This software
+	is designed to provide increased and extensible functionality for onboard camera
+	systems. Because our product is a proof of concept, there won?t be a real pilot, but the
+	pilot has been included as a user because the application of this design is to create
+	better equipment for pilot use. This pilot will be ?using? our product and needs the
+	video stream to meet the requirements outlined in the SRS.
+	\item \textbf{Distributor:}
+	Rockwell Collins is the sponsor and primary stakeholder in this project. They will
+	evaluate the product and decide where to use it. They will also decide the feasibility of
+	using this design in production and whether continuing to use single board computers
+	for real-time video processing is a good idea.
+	\item \textbf{Implementer:}
+	The implementer has to set up the simple vision system on their given hardware. Our
+	proof of concept should give some notion as to how to do this and also the feasibility
+	and easiness of it. The concepts demonstrated in this design document can be used on
+	different hardware, not just the NVIDIA Jetson.
+	\item \textbf{Algorithm Designer:}
+	The algorithm designer interacts with our software in different ways than the end user
+	and implementer. This user will create custom modules and link them together with our
+	easy to use configuration system. This configuration should serve as a design for other
+	systems.\\
 	\end{enumerate}
 	
 	\paragraph{Use Case Diagram}
@@ -127,7 +172,12 @@ This section shows the high level organization of our software design.
 	There are three key design elements in our software design. These elements are important because they are the basis for the entire modular video processing system.\\
 	
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Video Buffer:}	Shared data space provided by video4linux or created internally. Video data is in YUV format and access is provided through a void pointer to a 	contiguous block of memory.	\item \textbf{Algorithm Module:} 	Algorithm modules are single purpose elements that operate on one or more input buffers and provide output to one or more output buffers. They 	consist of a C function which performs the operations, and a module definition structure which provides the name and expected input and outputs 	of a module. 	\item \textbf{Algorithm Controller:}	This element is responsible for ordering and executing Algorithm Modules. It is the primary routine in this software design. It reads from a JSON 	configuration file, creates a module execution tree, and manages the execution of concurrently running modules.\\
+	\item \textbf{Video Buffer:}
+	Shared data space provided by video4linux or created internally. Video data is in YUV format and access is provided through a void pointer to a 	contiguous block of memory.
+	\item \textbf{Algorithm Module:} 
+	Algorithm modules are single purpose elements that operate on one or more input buffers and provide output to one or more output buffers. They 	consist of a C function which performs the operations, and a module definition structure which provides the name and expected input and outputs 	of a module. 
+	\item \textbf{Algorithm Controller:}
+	This element is responsible for ordering and executing Algorithm Modules. It is the primary routine in this software design. It reads from a JSON 	configuration file, creates a module execution tree, and manages the execution of concurrently running modules.\\
 	\end{enumerate}
 	
 	\paragraph{Structure Description}
@@ -144,14 +194,31 @@ This section shows the high level organization of our software design.
 	The main goal of this project is to determine how much video processing can be done on a SBC while maintaining a frame rate of 30 FPS and latency below 100ms. To this end, we as the user have two design concerns that need to be addressed.\\
 	
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Latency measurement:}	In order to keep overall latency under 100ms while maximizing the amount of processing being done, we need to know how long each algorithm 	takes to process a single frame, and also how long it takes from input to output.	\item \textbf{FPS Monitoring:}	Our software must process video in real time. For the purposes of this project, that has been specified as 30 FPS by our SRS. This is separate 	from the latency requirement because our system may actually be operating on multiple frames simultaneously, so the frames per second may not 	necessarily dictate the total latency.\\
+	\item \textbf{Latency measurement:}
+	In order to keep overall latency under 100ms while maximizing the amount of processing being done, we need to know how long each algorithm 	takes to process a single frame, and also how long it takes from input to output.
+
+	\item \textbf{FPS Monitoring:}
+	Our software must process video in real time. For the purposes of this project, that has been specified as 30 FPS by our SRS. This is separate 	from the latency requirement because our system may actually be operating on multiple frames simultaneously, so the frames per second may not 	necessarily dictate the total latency.\\
 	\end{enumerate}
 	
 	\paragraph{Design Elements}
 	This viewpoint contains several design elements that depict major components of our software design.\\
 	
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Camera Buffer:}	Initially, camera buffer will store the data immediately loaded by the camera and will then be repurposed to hold the modified image later. This 		modified image will come from the custom algorithm code.	\item \textbf{Custom Algorithm:}	The custom algorithm is loaded into the system when it starts up through the JSON configuration files and dynamically linked libraries. This 		portion of the system will perform operations on the camera buffer and log the time at start and time at completion. It will then write back to the 		camera buffer, the modified image.	\item \textbf{Log:}	The log is a feed that will keep track of the frame rate and information about what processes are running. This should be viewable separately from 	the display.	\item \textbf{Display:}	The last thing that should happen when we are rendering frames is the stream to the display. This will show the final, completely processed 		image. Our client has contacted us and told us that the display should only show the video stream, not other metrics like frames per second or 		operations per frame.	\item \textbf{Video4Linux Camera Driver:}	This is our direct access point to the video stream from the USB camera. It enables us to receive video frames from any cameras supported by 	the Linux operating system.\\
+	\item \textbf{Camera Buffer:}
+	Initially, camera buffer will store the data immediately loaded by the camera and will then be repurposed to hold the modified image later. This 		modified image will come from the custom algorithm code.
+
+	\item \textbf{Custom Algorithm:}
+	The custom algorithm is loaded into the system when it starts up through the JSON configuration files and dynamically linked libraries. This 		portion of the system will perform operations on the camera buffer and log the time at start and time at completion. It will then write back to the 		camera buffer, the modified image.
+
+	\item \textbf{Log:}
+	The log is a feed that will keep track of the frame rate and information about what processes are running. This should be viewable separately from 	the display.
+
+	\item \textbf{Display:}
+	The last thing that should happen when we are rendering frames is the stream to the display. This will show the final, completely processed 		image. Our client has contacted us and told us that the display should only show the video stream, not other metrics like frames per second or 		operations per frame.
+
+	\item \textbf{Video4Linux Camera Driver:}
+	This is our direct access point to the video stream from the USB camera. It enables us to receive video frames from any cameras supported by 	the Linux operating system.\\
 	\end{enumerate}
 	
 	\paragraph{UML Sequence Diagram}
@@ -164,20 +231,28 @@ This section shows the high level organization of our software design.
 	\paragraph{Design Concerns}
 	
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Configuration:}	This viewpoint addresses how the user will configure our software. It shows how the modules are connected to each other and the information that 	needs to be provided for the software to create its internal structure.	\item \textbf{Internal Data Structure:}	In order to implement the modular image processing system, our design needs an internal data structure in order to determine the execution path 	through the various modules.\\
+	\item \textbf{Configuration:}
+	This viewpoint addresses how the user will configure our software. It shows how the modules are connected to each other and the information that 	needs to be provided for the software to create its internal structure.
+
+	\item \textbf{Internal Data Structure:}
+	In order to implement the modular image processing system, our design needs an internal data structure in order to determine the execution path 	through the various modules.\\
 	\end{enumerate}
 	
 	\paragraph{Design Elements}
 	There are two design elements in this viewpoint:\\
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Module Instances:}	Module instances are C structures that describe either input device modules, output device modules, or algorithm execution modules. They 		consist of a name, type, and the names of the connected input and output modules.	\item \textbf{JSON Configuration File:}	In order to create the internal data structure for our application, the user must write a configuration file in JSON format. The elements in this 		configuration file are detailed in an example below (Example JSON Configuration File).\\
+
+	\item \textbf{Module Instances:}
+	Module instances are C structures that describe either input device modules, output device modules, or algorithm execution modules. They 		consist of a name, type, and the names of the connected input and output modules.
+	\item \textbf{JSON Configuration File:}
+	In order to create the internal data structure for our application, the user must write a configuration file in JSON format. The elements in this 		configuration file are detailed in an example below (Example JSON Configuration File).\\
 	\end{enumerate}
 	
 	\paragraph{Description and Rationale}
 	The HawkEye video processing software needs to be able to handle various configurations of multiple camera inputs and produce multiple outputs, as well as performing multiple video processing algorithms. In order to do this, it needs to know what operations to perform in what order, and where to put the data. To do this, our software uses a tree-like data structure that connects the camera inputs, algorithm modules, and outputs. An input module definition specifies what modules a camera sends data to. Each of those modules then has its own output specification, which can either go to another algorithm module or an output module. \\
 	
 	\paragraph{Sample Entity Relationship Diagram}
-	\begin{figure}[!ht] %\textwidth,natwidth=610,natheight=642
+	\begin{figure}[!h] 
 		\centering
 		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/ER_Diagram.png}  
 		\end{figure}
@@ -186,7 +261,42 @@ This section shows the high level organization of our software design.
 	The corresponding JSON configuration file for the above ER diagram. \\
 	
 	 \begin{lstlisting}
-	 {   	 	"Output1":{        			"type":"output",        			"input":"Combo1"    		},    		"Combo1":{        			"type":"Combination",        			"inputs":"Filter1,Filter2",        			"output":"Output1"    		},   		 "Filter1":{        			"type":"Rfilter",        			"input":"Camera1",        			"output":"Combo1:1"    		},    		"Filter2":{        			"type":"Gfilter",        			"input":"Camera2",        			"output":"Combo1:2"    		},    		"Camera1":{       		 	"type":"Input",        			"device":"/dev/video0",        			"output":"Filter1"    		},    		"Camera2":{        			"type":"Input",        			"device":"/dev/video1",        			"output":"Filter2"   		 },    		(not used in this example but also an option)    		"Tracker":{        			"type":"Module",        			"filename":"tracker.so"   	 	}	}
+	 {
+   	 	"Output1":{
+        			"type":"output",
+        			"input":"Combo1"
+    		},
+    		"Combo1":{
+        			"type":"Combination",
+        			"inputs":"Filter1,Filter2",
+        			"output":"Output1"
+    		},
+   		 "Filter1":{
+        			"type":"Rfilter",
+        			"input":"Camera1",
+        			"output":"Combo1:1"
+    		},
+    		"Filter2":{
+        			"type":"Gfilter",
+        			"input":"Camera2",
+        			"output":"Combo1:2"
+    		},
+    		"Camera1":{
+       		 	"type":"Input",
+        			"device":"/dev/video0",
+        			"output":"Filter1"
+    		},
+    		"Camera2":{
+        			"type":"Input",
+        			"device":"/dev/video1",
+        			"output":"Filter2"
+   		 },
+    		(not used in this example but also an option)
+    		"Tracker":{
+        			"type":"Module",
+        			"filename":"tracker.so"
+   	 	}
+	}
 	 \end{lstlisting}
 	
 	The one rule for the JSON files is that each entity must be declared before its inputs; this top down approach enables the JSON parsing algorithm to generate the module tree in a single pass. The one exception to this rule is cyclical algorithms that operate on their own output, either directly or indirectly. Support for such algorithms may be implemented, but this is not part of the current project scope. 
@@ -198,7 +308,11 @@ This section shows the high level organization of our software design.
 	\paragraph{Design Elements}
 	
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Camera:}	For the purposes of this viewpoint, Camera shall refer to the combination of the physical camera hardware and the system level driver that exists 	outside of the HawkEye video processing application.	\item \textbf{Software:}	Refers to the HawkEye video processing application.\\
+	\item \textbf{Camera:}
+	For the purposes of this viewpoint, Camera shall refer to the combination of the physical camera hardware and the system level driver that exists 	outside of the HawkEye video processing application.
+
+	\item \textbf{Software:}
+	Refers to the HawkEye video processing application.\\
 	\end{enumerate}
 	
 	\paragraph{Overview}
@@ -206,12 +320,40 @@ This section shows the high level organization of our software design.
 	\paragraph{States}
 	
 	\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
-	\item \textbf{Camera Initializing:}	This is the starting state. Before we can capture frames from the camera, we must first initialize it. In this state we will also set up and synchronize 	the memory shared by the camera and our software.	\item \textbf{Camera Initialized:}	After we have initialized the camera it will be ready for capture. The software will have to start the camera?s frame capture.	\item \textbf{Camera Capturing:}	The camera will take a moment to capture the data.	\item \textbf{Camera Writing:} 	The camera will have to write the data to memory. 	\item \textbf{Image Reading:}	Importing data from the camera?s output into the software. This step should be simultaneous with camera writing as we are using the same 		memory. 	\item \textbf{Image Processing:} 	The image data in the buffer will be processed in place by the modular video processing system.	\item \textbf{Process completed:}	Once the algorithm is done operating, it will notify the controller that it has finished.	\item \textbf{Write to Display:}	The software will write the finalized image buffer to the display, displaying the video.	\item \textbf{Camera Finalizing:}	During this state, the camera is sending any remaining data and shutting down.	\item \textbf{Camera Shut Down:}	The camera is turned off. \\
+	\item \textbf{Camera Initializing:}
+	This is the starting state. Before we can capture frames from the camera, we must first initialize it. In this state we will also set up and synchronize the memory shared by the camera and our software.
+
+	\item \textbf{Camera Initialized:}
+	After we have initialized the camera it will be ready for capture. The software will have to start the camera's frame capture.
+
+	\item \textbf{Camera Capturing:}
+	The camera will take a moment to capture the data.
+
+	\item \textbf{Camera Writing:} 
+	The camera will have to write the data to memory. 
+
+	\item \textbf{Image Reading:}
+	Importing data from the camera's output into the software. This step should be simultaneous with camera writing as we are using the same 		memory. 
+
+	\item \textbf{Image Processing:} 
+	The image data in the buffer will be processed in place by the modular video processing system.
+
+	\item \textbf{Process completed:}
+	Once the algorithm is done operating, it will notify the controller that it has finished.
+
+	\item \textbf{Write to Display:}
+	The software will write the finalized image buffer to the display, displaying the video.
+
+	\item \textbf{Camera Finalizing:}
+	During this state, the camera is sending any remaining data and shutting down.
+
+	\item \textbf{Camera Shut Down:}
+	The camera is turned off. \\
 	\end{enumerate}
 	
 	\paragraph{State Transition Diagram}
-	Because the two state machines interact often, we?ve combined them in the same graphic. The following is our UML state machine:\\
-	\begin{figure}[!ht] %\textwidth,natwidth=610,natheight=642
+	Because the two state machines interact often, we have combined them in the same graphic. The following is our UML state machine:\\
+	\begin{figure}[!ht] 
 		\centering
 		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/StateTransition_Diagram.png}  
 		\end{figure}
