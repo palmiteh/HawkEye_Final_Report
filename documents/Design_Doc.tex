@@ -80,8 +80,8 @@ The core requirements of our system that this design either implements or implem
 capability of testing are as follows:\\
 \begin{enumerate}[leftmargin=2cm,labelindent=2cm]
 \item System must be capable of processing multiple video streams
-\item System must enable thorough testing of the Jeston's video processing capabilties
-\item Framerate must be at least 30FPS
+\item System must enable thorough testing of the Jeston's video processing capabilities
+\item Frame rate must be at least 30FPS
 \item End to end latency must be less than 100ms\\
 \end{enumerate}
 
@@ -137,9 +137,9 @@ kinds of users and stakeholders. These users interact with the software in diffe
     	\item \textbf{Pilot:}
 	Our intended user will be a pilot of a manned or unmanned aerial vehicle. This software
 	is designed to provide increased and extensible functionality for onboard camera
-	systems. Because our product is a proof of concept, there won?t be a real pilot, but the
+	systems. Because our product is a proof of concept, there won't be a real pilot, but the
 	pilot has been included as a user because the application of this design is to create
-	better equipment for pilot use. This pilot will be ?using? our product and needs the
+	better equipment for pilot use. This pilot will be 'using' our product and needs the
 	video stream to meet the requirements outlined in the SRS.
 	\item \textbf{Distributor:}
 	Rockwell Collins is the sponsor and primary stakeholder in this project. They will
@@ -159,10 +159,16 @@ kinds of users and stakeholders. These users interact with the software in diffe
 	\end{enumerate}
 	
 	\paragraph{Use Case Diagram}
-		\begin{figure}[H] %\textwidth,natwidth=610,natheight=642
-		\centering
-		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/UseCase_Diagram.png}  
-		\end{figure}
+	
+	\begin{minipage}{\linewidth}
+		\includegraphics[keepaspectratio=true,scale=0.6]{images/UseCase_Diagram.png}
+		%\begin{figure}[H] %\textwidth,natwidth=610,natheight=642
+		%\centering
+		%\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/UseCase_Diagram.png} 
+		%\caption{Use Case Diagram}\label{UseCase_Diagram.png} 
+		%\end{figure}
+		
+	\end{minipage}
 	
 \subsubsection{Structure Viewpoint}
 This section shows the high level organization of our software design.  
@@ -184,7 +190,7 @@ This section shows the high level organization of our software design.
 	The HawkEye video processing software receives frames from the Video4Linux driver as a pointer to a buffer. The Algorithm Controller invokes each video processing algorithm in the order described by the configuration file, by passing them pointers to the buffers assigned to them. The video processing algorithms perform actions directly on the video buffer in order to avoid the performance hit from accessing additional memory. When the last video processing algorithm is complete, the buffer is flushed to the output device.\\
 	
 	\paragraph{Data Flow Diagram}
-	\begin{figure}[H] %\textwidth,natwidth=610,natheight=642
+	\begin{figure}[H] 
 		\centering
 		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/DataFlow_Diagram.png}  
 		\end{figure}
@@ -222,7 +228,7 @@ This section shows the high level organization of our software design.
 	\end{enumerate}
 	
 	\paragraph{UML Sequence Diagram}
-	\begin{figure}[H] %\textwidth,natwidth=610,natheight=642
+	\begin{figure}[H] 
 		\centering
 		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/UML_Diagram.png}  
 		\end{figure}
@@ -353,7 +359,7 @@ This section shows the high level organization of our software design.
 	
 	\paragraph{State Transition Diagram}
 	Because the two state machines interact often, we have combined them in the same graphic. The following is our UML state machine:\\
-	\begin{figure}[!ht] 
+	\begin{figure}[H] 
 		\centering
 		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/StateTransition_Diagram.png}  
 		\end{figure}
