@@ -1,2 +1,101 @@
 \subsubsection{March 25, 2016}
 \paragraph{Spring Break Progress}
+It's spring break and we have got a lot done this week.
+
+\begin{enumerate}[leftmargin=2cm,labelindent=2cm]
+\item \textbf{Color space conversion algorithm (Bayer Demosaicing):} 
+To increase the flexibility of our software and provide a platform to implement additional computer vision algorithms, we implemented a very fast CUDA-based color space conversion algorithm that converts the raw Bayer Color Filter Array image data to RGBA format. This enables us to create algorithms based on not only intensity but color as well. This algorithm replaces the CPU-intensive conversion method provided by Point Grey, which is only capable of converting about 30 frames per second maximum on our hardware. With the new CUDA-based algorithm, our software can process 100 frames per second with both full color and grayscale outputs. This allows us to use both algorithms requiring color and grayscale images.
+\item \textbf{Our own line segment detection algorithm:} 
+Additionally, we have begun development of a custom, entirely new line CUDA-based line segment detection algorithm. Our system is based on (but entirely different from) a CPU-based algorithm called LSD, which stands for Line Segment Detector (http://www.ipol.im/pub/art/2012/gjmr-lsd/article.pdf). The CPU based algorithm is far too slow to ever be used in real time, but we hope to get our GPU based algorithm to detect all lines in an image in under 1ms. In it's current phase, our line segment detector can detect sharp edges in about 3ms, but cannot differentiate between straight and curved lines. However, the newest version that is currently in development will perform all of its operations within the GPU's register space or L1 cache memory, which will eliminate 80\% of the high-latency global memory operations required by the algorithm and result in a much faster processing time.
+\item \textbf{Next Steps:} 
+Our line segment detection algorithm not only detects individual lines, but also rapidly finds intersecting line segments, which lays the groundwork for us to detect runways even without the runway lighting system. Our runway detector will look for long, narrow, roughly rectangular shapes (with compensation for obstructions and intersecting runways), and then identify markings within the runway, if possible (depending on the range and focus). It will then combine this information with any detected lighting patterns to determine the probability that it is in fact a runway. If a runway is detected, it will overlay the detected lines onto the screen, as well as an appropriately scaled directional indicator that shows the direction of the landing strip.
+\item \textbf{Parallell Processing:} 
+This week, we also created an entirely new data interchange format designed specifically for parallel processing multiple video streams. This class, called Frame, holds both the RGB and Mono images for an individual frame, keeps track of the time it was created and the time it is destroyed, and also synchronizes execution of GPU and CPU modules on the same data. CUDA has what are known as streams, which are independent execution queues for GPU kernels. They allow multiple kernels to run on the same GPU without waiting for each other or interfering with each other in any way. Each frame object has its own stream, which avoids congestion on the GPU. An example would be, if Frame1 is ready to be processed by the line segment detection algorithm, but Frame2 is currently being demosaiced, and they both utilized the default stream, Frame1 would have to wait until Frame2 is done with demosaicing before it could start the line segment detector. Furthermore, Frame2 might even start its line segment detector before Frame1's thread could wake up and begin execution, so Frame2 might even be processed before Frame1. With streams, this situation is avoided entirely because Frame1 can be processed while Frame2 is demosaicing, and is not blocked or delayed. This method resulted in much greater stability and an overall higher frame rate.?\\
+\end{enumerate}
+
+\subsubsection{April 1, 2016}
+\paragraph{Meeting with Carlo}
+This week we met with Carlo and Weston to show them our progress. ?The meeting went well. We were able to demo the project so far, which they were impressed by. They had questions about how exactly we measured our frame rate. We were using software timers to test our system, which apparently can lie about the frame rate. They suggested that we use a high-speed camera and an LED to measure exactly how long it takes for the image to show up on the screen. We are currently working on using a GoPro for this as we do not have access to any higher speed cameras.
+\par
+We also talked about our display at expo. Carlo and Weston said that creating a scaled air strip would be a good idea. They suggested putting NIR (Near Infra-Red) LEDs on the air strip and detecting them with our NIR camera to show off an asymmetrical camera system, which is an important part of arial vision systems.
+\par
+We also explained our system to them in detail, such as how our program is designed and how the program flows. Carlo and Weston wanted more information about our program and suggested that we create diagrams that explained all parts of our system.
+\par
+All in all they were very impressed. We are planning to meet again soon.\\
+
+\subsubsection{April 8, 2016}
+\paragraph{Building the Runway}
+This week, we've been working on creating a runway for the model for expo. We're trying to make the scale correct relative to a real airport so we've been going over FAA documents trying to get all the markings right.
+\par
+We also met with Xinze and described our progress so far, along with our meeting last week.
+\par
+We also decided that we're going to use a GoPro, if we can,? to measure the true latency of our system.\\
+
+\subsubsection{April 15, 2016}
+\paragraph{Gearing Up}
+This week we sent out a lot of emails. A bit of the background processes in the last couple weeks was figuring out exactly what hardware we needed to create a good presentation at expo. We've moved to get a few pieces of hardware:
+
+\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+\item A lens spacer to make our 8mm lense less blurry at the required distance.
+\item An NIR filter so that our NIR camera doesn't pick up visible light.
+\item A GoPro with 120 fps to test the latency of our cameras correctly.
+\item NIR LEDs to line the runway, which will be picked up by our NIR camera.
+\item A zoom lens to see the letters on our model runway.
+\end{itemize}
+
+We've almost finished creating the model runway and it looks great. We still need to add the center lines to it. Also we've acquired the GoPro from Kevin and got it working.? We might still need an SD card expander to read from the GoPro, but I've got one.\\
+
+\subsubsection{April 22, 2016}
+\paragraph{Expo Poster Final Touches}
+At the start of this week we acquired a GoPro from Kevin to use for testing the latency of our program. Our initial latency testing shows about 84ms for a color image with edge detection and 24ms for the 3 cameras combined with the sobel filter in black and white. We able to see that the color conversion was causing a great increase in our overall system and have been working this week to try to improve that. 
+\par
+We also created an overlay filter to counter the parallax effect for our live demonstration at the engineering expo. This visually aligns the inputs from the two cameras so that the runway appears in the same location on both images. Shifting the pixels of one image to match the other image is how this is . Our demonstration will combine the image of a standard camera to identify the runway during daylight with our NIR camera to detect the approach lights when it is dark. The overlay filter will combine the two camera's images and properly align them to get a clear output image.
+\par
+We also have ordered the NIR LEDs, and received the camera spacers and the NIR filter we ordered last. We are still trying to get in contact with Carlo to receive the zoom lens. This lens will allow use to identify the runway numbers better by zooming in on them whenever it is needed.\\?
+
+\subsubsection{April 29, 2016}
+\paragraph{Minor Tweaks and Improvements}
+The logistics for this week consisted of a meeting with Xinze to discuss our current progress and/or any bugs we are having with our project (we currently have no issues), and also about the submission of the poster to the library for printing. ?
+\par
+We also acquired some LED strip lights from Kevin to use as our approach lights on our runway. We are planning to operate them using a Raspberry Pi. We have been in contact with Carlo about the zoom lens and he is mailing that to Hailey's home address, that way, next week, we can begin further development of the zoom functionality for our demonstration. 
+\par
+Carlo also mentioned he had a few comments on the poster as feedback. We are currently waiting for his email description to make any changes to our poster, which we then will submit to the library for printing. 
+\par
+On the development side for this week, we developed a new, cleaner version of our code base using a new "Pipeline" class. This class provides parallelization without any effort from the developer, who simply has to implement the image processing functions and use them within an inherited virtual class member function. Additionally, both the display output and the pipeline input only grab the most recent frames, which reduces latency. By using this new pipelined approach, we were able to drop the end-to-end latency for our most intensive operations from 85 ms down to less than 60 ms, as measured with our goPro high speed camera. This decrease in latency appears to be roughly an inverse linear relationship. This is all with respect to the number of concurrent pipeline threads, up to around 6 concurrent threads, after which the increase in efficiency seems to be minimal. The decrease in latency came with only a very minimal drop in frame rate, which came down to around 90fps, which is still more than three times the frame rate we require. This approach also works much better with multiple cameras, as the pipeline class takes care of the setup and teardown of the cameras, as opposed to doing all of that in the main/host program.\\
+
+\subsubsection{May 6, 2016}
+\paragraph{Spring Midterm Progress Report}
+This week mainly consisted of working on midterm progress/release report and presentation. We have now finished both with only a few minor touches to the video to make and turning it all in. Last week we had divided up all the sections that needed to be added and/or changed to the document. That organization made this report very easy to construct and were able to work on it without having to meet a bunch. We did get a room in the library in order to record using Hailey's headset so that the audio for our presentation was all the same and very clear. 
+\par
+?We also received the zoom lens from Carlo this week and will begin implementing our full demonstration for the Engineering Expo next week.\\ ??
+
+\subsubsection{May 13,2016}
+\paragraph{Preparing for Expo}
+This week we were each working independently to ensure that expo goes smoothly?.
+\par
+Some of the things we did this week were:
+\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+\item Finishing the runway board, adding the runway number and the middle lines
+\item Creating a simplified version of the program
+\item Fixing the bugs in the most version of the program and making it more stable\\
+\end{itemize}
+
+\subsubsection{May 20, 2016}
+\paragraph{EXPO!}
+This week we did a lot of preparation for expo. This included finishing up the code as well as assembling the display and making sure it would all operate correctly during expo.
+\par
+Expo was really fun and a great opportunity to meet people in industry. I was really great to see our efforts pay off and people really enjoyed learning about our project, even kids. It seemed that the industry professionals were pretty impressed with it too as we got a lot of interest.
+\par
+We've got some follow ups with our client, but besides that we simply have the final report to do and then our term is complete.\\
+
+\subsubsection{May 27, 2016}
+\paragraph{Engineering Expo Results}
+This week during class, Kevin recapped how the engineering expo had gone all for the computer science department. We found out that NVIDIA was happy about the use of the Jetson TX1 in our project and the capabilities we were able to achieve from it. We also found out that we were voted first place out of all the computer science projects and received a gift bag as our reward. 
+\par
+?Also this week the requirements for the final report and presentation were released. Our group has looked over the requirements and are planning to begin working on it next week.\\?
+
+\subsubsection{June 3, 2016}
+\paragraph{Final Report}
+This week we picked up our flash drive for all of the documentation and code we have generated over the duration of our project. It will be attached to the back of our written report, which we have started this week. On Wednesday we had a meeting to break up all of the different part of our final report as it is a very large document we are generating. We talked minimally about the presentation, but have decided to put that off till we are finished with the written report. Once that is finished we will make an outline to follow for our presentation. We are hoping to have the written report done early next week.
+\par
+We have also contacted Carlo to try to figure out when we will be able to bring the project up to Rockwell Collins. We are hoping that the end of next week will work for him as we should be complete with our presentation and live demonstration by then.
