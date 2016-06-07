@@ -1,29 +1,133 @@
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{January 8, 2016}
+\paragraph{HawkEye Crew is back at it}
+After a long, and much needed break, we are back into the grind of Winter term. This first week was busy for us. We began this week by finding that our Tx1 had a manufacturing problem, preventing it from connecting to wifi. We notified our instructor who gave us another board that turned out to be defective in the same way. Soon, we will get a Tx1 that definitely works correctly and start developing on it, but in the meantime, we've been working with the Tk1.
+\par
+We installed graphics drivers on the Tk1 as well as drivers for the camera we currently have. We found that we need to recompile the Jetson Tk1's operating system in order to grab full 2048x2048 images from the camera, but we're able to grab images at a lower resolution using the FlyCapture API currently.
+\par
+We got some extra hardware: a USB hub and two USB wifi dongles. Kevin supplied the hub and one of the USB wifi dongles.
+\par
+We're trying to setup a meeting with Carlo this week to go over milestones and a timeline, which we built this week.
+\par
+We also met with our TA today and learned what we need to do for the alpha stage. We must write up a document describing the process so far. The criteria for this document hasn't been defined clearly yet. We also have to make a video demonstrating our product. We were thinking of showing the camera in action and going over some of the code/interface for the project. This video has to explain each point of the requirements document which we should look over.
+\par
+We still have to get a second camera working and setup a framework for image processing before the alpha stage.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{January 15, 2016}
+\paragraph{Beginning the Development Process}
+Week 2 of Winter term of is beginning to smooth itself out from last weeks discovery of the Jetson Tx1 manufacture bug and the difficulties of connecting to Wifi with the Tk1. We had to recompile the Tk1 with a special version of linux4tegra, called "Grinch", to get on output from the USB 3 camera. It proved to be not a simple task, as we still have some connection and display issues with the video. We began to realize that development on the Tk1 may not even be worth the struggle, and decided we need to get a working Tx1. 
+\par
+With Kevin to the rescue, we were able to pick up a new Tx1 from him that is fully functional, with all the bells whistles (including working on board Wifi). We were able to pick that up on Thursday, so we haven't had much time yet to try to get a working product between the Tx1 and our USB 3.0 camera, but plan to try and get that up and running before our meeting with Carlo on Monday via Webex. 
+\par
+Carlo requested a monthly milestone marker as to show what we should have to present to him and Weston at each of our monthly meetings. We created milestones Winter term, which will cover both our alpha and beta releases. Our rough idea of milestones is listed below.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+January Meeting: January 11th
+\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+\item Download graphics driver onto Jetson TK1
+\item Download device driver for camera onto TK1
+\item Display image onto monitor
+\end{itemize}
 
-\subsubsection{, 2016}
-\paragraph{}
+February Meeting: Alpha Release \- February 11th
+\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+\item Download all needed software onto Jetson TX1
+\item Display image from built-in camera on monitor
+\item Display image from RC camera and built-in camera
+	\begin{itemize}
+	\item Stitch the two images together
+	\end{itemize}
+\item Have option for applying filters, but not actual apply the filters
+\end{itemize}
 
-\subsubsection{, 2016}
-\paragraph{}
+March Meeting: Beta Release \- March 14th
+\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+\item Fully functional filters
+\item Stretch Goals:
+	\begin{itemize}
+	\item Modularity with JSON
+	\item Multiple monitor display
+	\item Object tracking
+	\item Display video operation metrics
+	\item Compare with different single board computers
+	\end{itemize} 
+\end{itemize}
+To finish off the week we all three sat down at meeting to revise our requirements document, as it is what we need to be moving forward with for the release of our alpha and beta product releases. Only a few things were changed, like making sure we have two working cameras for our system and to not specify only using the Tk1 or the Tx1. As we move forward we plan to rely more heavily on the Tx1, but want to allow ourselves the room to be able to fall back on the Tk1 if need be to complete our project. We will be uploading that document to the Sharepoint tonight and presenting the updated to our client on Monday at our monthly meeting.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{January 22, 2016}
+\paragraph{Meet-up and Decisions}
+We met with Carlo this week to show Carlo our current progress on the project. Our progress included a working video output from on board camera on the Jetson Tx1. We were able to display the image at 1080p with 30 or 60 fps. This video stream used embedded streamer code to transform the image buffer generated from the camera into a Video4Linux compatible format which then was read with OpenCV and displayed.
+\par
+After the presentation of our project to our client, we went through the milestones we had sent Carlo last week. We are ahead of schedule with most of our February milestones complete. We just need to add a second camera and generate a few filters.
+\par
+We have asked Carlo to send us the model number of the 4 other PointGrey cameras he has on hand. We also have asked for a list of typically used types of filters for aircraft vision systems.
+\par
+We are to send Carlo a block diagram of the program flow from camera to display. This will be used to judge if it will be possible to incorporate RC's virtual camera system, easily, into our software.
+\par
+We are also going to send some sample output of the video we have produced.
+\par
+Lastly we will be researching a few options of cameras to add to our project and sending them to Carlo for his input on which ones would suite his image of the project.
+\par
+We are focusing on getting two cameras' output displayed before moving on to fixing compatibility with other cameras or filters, and decided that using two USB 3.0 cameras would be the fastest way to yield this result.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{January 29, 2016}
+\paragraph{PointGrey Camera on Point}
+Last week we were able to get the ?camera that is onboard the Jetson Tx1 to display an image at 1080p and 30fps. We were having much more difficulty with the USB 3.0, PointGrey, camera that Rockwell Collins had supplied for us, but this week we managed to get it to work. ?
+\par
+We were missing two big elements as to why we had so much trouble with getting a video output from it last week. We recompiled the Linux kernel to increase the USB buffer size to accommodate higher resolution image capture from the PointGrey camera. We also acquired code from PointGrey to interface between the proprietary camera API and openCV.
+\par
+After we were able to get the video output working we implemented two basic edge detection functions using several of openCV's built-in functions to gain familiarity with the openCV API. Now that we have the USB 3.0 PointGrey camera working and running some filter capabilities, we have discussed the need for additional cameras that Carlo has available for us. 
+\par
+In class this week we went over the requirements needed for our Alpha release, which will contain a written document and 20-30 minute presentation of our progress with the project so far. The Alpha release must have all capabilities present, but do not need to have full functionality. For our project, this means having a video stream from multiple cameras displayed at decent frame rate and the ability to apply simple filters to the video stream. The next few weeks will comprise of writing the document needed for the release and moving forward with operating two cameras into one output.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{February 5, 2016}
+\paragraph{Modularity and Multiple Cameras}
+A major goal for this week was to get a second camera. This would allow us to be able to begin furthering our software to handle processing of multiple video streams into one output. Multiple cameras are a requirement that is needed for us to able to have a complete project at Beta release, but something we wanted to be able to at least support with our Alpha release. We were able to get in contact with Carlo, and set-up a meeting allow us to (very generously) borrow two more PointGrey cameras with additional lenses as well. On Thursday Hailey drove up to Rockwell Collins in Willsonville to have an informal meeting/lunch with both Carlo and Weston to pick up the cameras.
+\par
+Last weekend Ryan got a full modular system built within our software. ?Our software reads a JSON configuration file to set-up the modules??. This allows for more flexibility with the use of different cameras and their software. It also gives us the ability to different filter modules and only apply the ones we want a specific time. It could handle more flexibility with use of different types of cameras only being used at specific times or for specific reasons. For example, a long range camera may only be activated when needed to find the runway. It could then be turned on and processing when needed, but deactivated to not decrease the performance metrics when not needed. 
+\par
+At the beginning of the week, the modular system was able to output a static image which allowed us to demonstrate that the system was working. We then created a module to handle the PointGrey camera software. This allowed us to get two of the cameras up and running with one video output. We haven't gotten the USB PCIe card yet, so we can't actually implement dual cameras over USB3 yet, but were able to run one on USB 3.0 and the other on USB 2.0.? Even though one of the cameras was being ran with USB 2.0, we were still able to capture decent frame rate and are below our required latency.? This weekend we will be fine tuning some of the video capabilities for our Alpha release presentation.
+\par
+This week we also began the outline of our written midterm progress report and will hopefully have a solid rough draft for our meeting with Xinze on Monday.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{February 12, 2016}
+\paragraph{Midterm Progress Report}
+This week no real progress on the software was made because we were busy creating our Alpha release. As we had all of the required features implemented to have an alpha release we were able to focus on getting that out instead of rushing to finish any last features needed. The release consisted of a written progress report and a 20 min video presentation of the project to include a powerpoint and demonstration. The video presentation basically covered the topics within the written report and a demonstration of the output of our project. We used Prezi to create our power point presentation.
+\par
+The report that covered a brief introduction of our senior project, our current progress, problems that have impeded our progress, and any preliminary results that have been gathered. It also described what is left to do before all of the requirements are met for the project along with the potential for some stretch goals if time allows. The report includes a few interesting pieces of code and a description of what this code does. It was constructed using the IEEEtran style guidelines.
+\par
+On Thursday, we were also able to get our PCIe card that will allow us to hook up multiple USB 3.0 cameras. In the next weeks, this will be the direction we are moving with development. For our Beta release we are going to need to get two cameras running on USB 3.0, increase our performance metrics, and build our own filters.\\
 
-\subsubsection{, 2016}
-\paragraph{}
+\subsubsection{February 19, 2016}
+\paragraph{Slow Week}
+This week, we didn't accomplish much. We all had a lot of work outside the class this week. We met on Monday with our TA and explained to him about the progress we had made. He asked us about how our current alpha-level software works, all of the problems we had encountered, and our plan for completing the beta in the next few weeks. He also informed us about the coming class meeting next week. We are planning to meet this weekend to do more work on the beta project.
+\par
+We also showed our client our video presentation and he approved of our progress.\\
+
+\subsubsection{February 26, 2016}
+\paragraph{Technical Stuff}
+This week, we've been trying to make the visual frame rate more smooth on the Jetson. ?While we're capturing and processing the images, we have the required frame rate, but, display to the screen is very slow. Our metrics claim that we can get 30fps on the screen, but the resulting visual display is obviously not 30fps.
+\par
+One solution we have to this problem is to use a low level API to display the images. We are planning to leave the capture and processing system in place, but simply replace the way we display the images, giving us more control over the display process. Our plan for replacement is to use GLUT which is a window system based on OpenGL. We have setup this replacement but haven't implemented the benefits of using GLUT which is zero copy. This means writing the camera images directly to a buffer that is read by the GPU. because the GPU and the CPU share memory, this is possible.
+\par
+Also we have very inconsistent results with these frame rates. Some of this was solved by writing more configuration details into our code, but the cameras sometimes remain in strange states and we are working on solving this.
+\par
+We also found today that the Jetson TX1 isn't displaying on a monitor and wasn't responding to ethernet and had to reflash. This is mostly due to bad configuration on the last power down. Thankfully we were prepared for a situation like this and were able to reflash the TX1.\\
+
+\subsubsection{March 4, 2016}
+\paragraph{FPS Up To 30 Using CUDA}
+This week we met our requirement for one camera by using CUDA libraries to process and handle the video buffers better. We currently have one camera outputting frames at 30 fps. We are trying to get this same performance with two cameras to fully meet our requirements.
+\par
+We've also been getting the frame rate above 30 fps using more tricks in CUDA.
+\par
+Another feature we added this week was a line detection filter, which can run without dropping our frame rate any significant amount. Eventually we will test the Jetson with these filters to see how many operations it will take to notice a drop in fps.
+\par
+We also worked on the poster and end of term report a bit. We are having some trouble compiling tex files, but that should be sorted out soon.
+\par
+We've also been having strange inconsistencies in the state of the cameras between operations of the software. This is mostly solved by unplugging and replugging the cameras, but we're trying to come up with a software solution to this problem.\\
+
+\subsubsection{March 11, 2016}
+\paragraph{Everything's Working} 
+This week we completed the requirements listed in our design document. ?We currently have 2 cameras streaming at 33 frames per second and 3 cameras running at 31 frames per second over USB3. We also got one camera running at around 100 frames per second but this program is unstable and crashes more than our program that runs at 30 frames per second.
+\par
+We are planning to move forward using this program that grabs and displays frames at 100 fps, working out the bugs as we go along. This program can run at 100 fps because we spawn different threads for converting the color space from raw to RGB. Before, this was being done in the same thread as the capture thread which delayed the frame rate. Spawning new threads for processing had sped up this process.
+\par
+We are planning to speed up frame capture even more by doing the color format conversion on the GPU using CUDA. This should get us to the maximum frame rate possible on the TX1.\\
