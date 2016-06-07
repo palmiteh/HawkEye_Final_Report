@@ -1,0 +1,118 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}
+\BOOKMARK [1][-]{section.2}{Original Requirements Document}{}
+\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Purpose}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Scope}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.3}{Definitions}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.4}{References}{subsection.2.1}
+\BOOKMARK [3][-]{subsubsection.2.1.5}{Assumptions and Constraints}{subsection.2.1}
+\BOOKMARK [2][-]{subsection.2.2}{Overall Description}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Product Perspective}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Product Functions}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.3}{User Characteristics}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.4}{Constraints}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.5}{Assumptions and Dependencies}{subsection.2.2}
+\BOOKMARK [3][-]{subsubsection.2.2.6}{Stretch Goal Timeline}{subsection.2.2}
+\BOOKMARK [2][-]{subsection.2.3}{Specific Requirements}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.3.1}{External Interfaces}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Functions}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Performance Requirements}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.4}{Design Constraints}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.5}{Maintainability}{subsection.2.3}
+\BOOKMARK [3][-]{subsubsection.2.3.6}{Portability}{subsection.2.3}
+\BOOKMARK [2][-]{subsection.2.4}{Stretch Goals}{section.2}
+\BOOKMARK [2][-]{subsection.2.5}{Gantt Chart}{section.2}
+\BOOKMARK [1][-]{section.3}{Requirements Document Changes}{}
+\BOOKMARK [2][-]{subsection.3.1}{Final Gantt Chart}{section.3}
+\BOOKMARK [1][-]{section.4}{Design Document}{}
+\BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Scope}{subsection.4.1}
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Purpose}{subsection.4.1}
+\BOOKMARK [3][-]{subsubsection.4.1.3}{Intended Audience}{subsection.4.1}
+\BOOKMARK [3][-]{subsubsection.4.1.4}{References}{subsection.4.1}
+\BOOKMARK [2][-]{subsection.4.2}{Definitions}{section.4}
+\BOOKMARK [2][-]{subsection.4.3}{Conceptual Model for Software Description}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Software Design in Context}{subsection.4.3}
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Software Design Descriptions within the Life Cycle}{subsection.4.3}
+\BOOKMARK [2][-]{subsection.4.4}{Design Architecture}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.4.1}{Stakeholder Concerns and Requirements}{subsection.4.4}
+\BOOKMARK [3][-]{subsubsection.4.4.2}{Description of Architectural Design}{subsection.4.4}
+\BOOKMARK [3][-]{subsubsection.4.4.3}{Validation of Design}{subsection.4.4}
+\BOOKMARK [3][-]{subsubsection.4.4.4}{Overview of Viewpoints and Design Languages}{subsection.4.4}
+\BOOKMARK [2][-]{subsection.4.5}{Design Viewpoints}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.5.1}{Context Viewpoint}{subsection.4.5}
+\BOOKMARK [3][-]{subsubsection.4.5.2}{Structure Viewpoint}{subsection.4.5}
+\BOOKMARK [3][-]{subsubsection.4.5.3}{Interaction Viewpoint}{subsection.4.5}
+\BOOKMARK [3][-]{subsubsection.4.5.4}{Information Viewpoint}{subsection.4.5}
+\BOOKMARK [3][-]{subsubsection.4.5.5}{State Dynamics Viewpoint}{subsection.4.5}
+\BOOKMARK [1][-]{section.5}{Design Document Changes}{}
+\BOOKMARK [2][-]{subsection.5.1}{Overall Description Changes}{section.5}
+\BOOKMARK [2][-]{subsection.5.2}{Specific Requirements}{section.5}
+\BOOKMARK [2][-]{subsection.5.3}{Information Viewpoint}{section.5}
+\BOOKMARK [1][-]{section.6}{Technology Review}{}
+\BOOKMARK [2][-]{subsection.6.1}{Camera Interface \(Hardware Level\)}{section.6}
+\BOOKMARK [3][-]{subsubsection.6.1.1}{USB 3.0}{subsection.6.1}
+\BOOKMARK [3][-]{subsubsection.6.1.2}{Gigabit Ethernet}{subsection.6.1}
+\BOOKMARK [3][-]{subsubsection.6.1.3}{MIPI Camera Interface}{subsection.6.1}
+\BOOKMARK [3][-]{subsubsection.6.1.4}{Decision}{subsection.6.1}
+\BOOKMARK [2][-]{subsection.6.2}{Video Subsystem \(Software Level\)}{section.6}
+\BOOKMARK [3][-]{subsubsection.6.2.1}{OpenCV}{subsection.6.2}
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Direct Memory Handling}{subsection.6.2}
+\BOOKMARK [3][-]{subsubsection.6.2.3}{Gstreamer}{subsection.6.2}
+\BOOKMARK [3][-]{subsubsection.6.2.4}{Decision}{subsection.6.2}
+\BOOKMARK [2][-]{subsection.6.3}{Image Processing}{section.6}
+\BOOKMARK [3][-]{subsubsection.6.3.1}{On-board GPU}{subsection.6.3}
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Integrate Stream Processor}{subsection.6.3}
+\BOOKMARK [3][-]{subsubsection.6.3.3}{PCIe GPU}{subsection.6.3}
+\BOOKMARK [3][-]{subsubsection.6.3.4}{Decision}{subsection.6.3}
+\BOOKMARK [2][-]{subsection.6.4}{Demo Interface}{section.6}
+\BOOKMARK [3][-]{subsubsection.6.4.1}{QT Framework}{subsection.6.4}
+\BOOKMARK [3][-]{subsubsection.6.4.2}{OpenCV GUI}{subsection.6.4}
+\BOOKMARK [3][-]{subsubsection.6.4.3}{OpenGL}{subsection.6.4}
+\BOOKMARK [3][-]{subsubsection.6.4.4}{Decision}{subsection.6.4}
+\BOOKMARK [1][-]{section.7}{Technology Review Document Changes}{}
+\BOOKMARK [2][-]{subsection.7.1}{Technology Changes}{section.7}
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Camera Interface}{subsection.7.1}
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Video Subsystem}{subsection.7.1}
+\BOOKMARK [3][-]{subsubsection.7.1.3}{Image Processing}{subsection.7.1}
+\BOOKMARK [3][-]{subsubsection.7.1.4}{Demo Interface}{subsection.7.1}
+\BOOKMARK [1][-]{section.8}{Weekly Blog Posts}{}
+\BOOKMARK [2][-]{subsection.8.1}{Fall Term 2015}{section.8}
+\BOOKMARK [3][-]{subsubsection.8.1.1}{October 16, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.2}{October 23, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.3}{October 30, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.4}{November 6, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.5}{November 13, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.6}{November 20, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.7}{November 27, 2105}{subsection.8.1}
+\BOOKMARK [3][-]{subsubsection.8.1.8}{December 4, 2105}{subsection.8.1}
+\BOOKMARK [2][-]{subsection.8.2}{Winter Term 2016}{section.8}
+\BOOKMARK [3][-]{subsubsection.8.2.1}{January 8, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.2}{January 15, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.3}{January 22, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.4}{January 29, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.5}{February 5, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.6}{February 12, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.7}{February 19, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.8}{February 26, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.9}{March 4, 2016}{subsection.8.2}
+\BOOKMARK [3][-]{subsubsection.8.2.10}{March 11, 2016}{subsection.8.2}
+\BOOKMARK [2][-]{subsection.8.3}{Spring Term 2016}{section.8}
+\BOOKMARK [3][-]{subsubsection.8.3.1}{March 25, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.2}{April 1, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.3}{April 8, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.4}{April 15, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.5}{April 22, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.6}{April 29, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.7}{May 6, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.8}{May 13,2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.9}{May 20, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.10}{May 27, 2016}{subsection.8.3}
+\BOOKMARK [3][-]{subsubsection.8.3.11}{June 3, 2016}{subsection.8.3}
+\BOOKMARK [1][-]{section.9}{Final Poster}{}
+\BOOKMARK [1][-]{section.10}{Project Documentation}{}
+\BOOKMARK [1][-]{section.11}{Discovery of New Technologies}{}
+\BOOKMARK [1][-]{section.12}{Personal Experiences}{}
+\BOOKMARK [2][-]{subsection.12.1}{Hailey Palmiter}{section.12}
+\BOOKMARK [2][-]{subsection.12.2}{Scott Griffy}{section.12}
+\BOOKMARK [2][-]{subsection.12.3}{Ryan Kitchen}{section.12}
