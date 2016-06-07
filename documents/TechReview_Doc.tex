@@ -1,0 +1,174 @@
+\subsection{Camera Interface (Hardware Level)}
+There are three different camera interfaces available on the Jetson development board. Each one offers a different set of benefits and challenges.\\
+	\subsubsection{USB 3.0}
+	USB 3.0 is a high-speed plug and play interface that offers a theoretical 384 MB/s data throughput. One USB 3.0 port is available on the Jetson, but 		additional ports can be added using the mini PCI Express expansion slot.\\	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Availability of USB 3.0 cameras		\item Plug and play, with no camera configuration
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Jetson onboard USB 3.0 does not meet the USB 3.0 specification for bandwidth		\item Some cameras do not have USB 3.0 drivers for ARM		\item USB 3.0 only supports one camera per port due to bandwidth limits		\item Increased cost due to board expansion\\
+	\end{itemize}
+	
+	\subsubsection{Gigabit Ethernet}
+	The Jetson has one-gigabit Ethernet port available. Gigabit ports can handle 125 MB/s, however like USB 3.0 there are expansion cards available that add two additional ports.\\
+	
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item All gigabit cameras use a standardized interface and require no driver		\item More high quality cameras available than the USB 3.0 offers		\item Simple configuration with video4linux
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Most cameras require external power supplies		\item Gigabit cameras typically cost more than the USB 3.0 alternatives\\
+	\end{itemize}
+	
+	\subsubsection{MIPI Camera Interface}
+	The Tegra K1 processor on the Jetson has a direct camera interface, which is designed for onboard, low power camera modules. There are two MIPI interfaces, one 4 channel and one 1 channel interface, but any additional interfaces are unavailable.\\
+		
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item High speed, built in interface		\item Low power consumption		\item Lower latency because the video processing can be done before buffering
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Very limited number of cameras supported		\item Specific to the Tegra K1, making it not portable		\item Increased hardware complexity		\item Increased software complexity due to lack of standardized drivers\\
+	\end{itemize}
+	
+	\subsubsection{\textbf{Decision}}
+	We decided to use the USB 3.0 cameras because of the availability of low-cost high-quality cameras. Also, Rockwell Collins has several USB cameras they would like us to use. For our customer, it will be best to base the system around the USB 3.0 option. This may require adding a USB expansion card, but the other advantages of using USB 3.0 make it the first choice for camera connection.
+	
+\subsection{Video Subsystem (Software Level)}
+We will have a framework for streaming the video from different components (camera, image processing unit, display).\\
+	
+	\subsubsection{OpenCV}
+	We could use OpenCV to stream the video and setup processing of the video stream. This seems like the easiest approach, but would constrict us to the functions given by OpenCV, which might be enough for a proof-of-concept.\\
+		
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Able to write scripts using python		\item Can use OpenCL to take advantage of the GPU
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Hides functionality		\item Questionable performance\\
+	\end{itemize}
+	
+	\subsubsection{Direct Memory Handling}
+	We could handle the video stream ourselves on top of v4l provided by the Jetson, but would require some low-level knowledge of the Jetson?s hardware. It would allow for more control over the video stream and give better performance.\\
+	
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Fast performance		\item Full control of operations
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Requires low-level knowledge of the Jetson architecture		\item Complex, which make it much easier to develop bugs		\item Not portable to other boards\\
+	\end{itemize}
+	
+	\subsubsection{Gstreamer}
+	We could use Gstreamer, a free library with video functionality.Gstreamer is widely used as an industry standard, and works on different architectures. If we choose to use Gstreamer we are limited to the API it provides, which is pretty limited because it?s meant for video conversion.\\
+			
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Lightweight		\item Portable		\item Scriptable		\item Easy pipeline-design
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Questionable performance		\item May not be able to make use of hardware components\\
+	\end{itemize}
+	
+	\subsubsection{\textbf{Decision}}
+	We will start developing with OpenCV, but if the performance is to slow we may switch to a different option. Video4Linux may be enough to easily move the stream to different components of the Jetson.
+	
+\subsection{Image Processing}
+In order to demonstrate the processing power of the Jetson Tk1, we are going to implement some video processing algorithms.\\
+	\subsubsection{On-board GPU}
+	We could make use of the GPU on the Jetson to do image processing to test the performance. GPUs are commonly used for this type of processing and there are many ways to access the functionality of it.
+		
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Easy to use		\item Easy to maintain		\item Easy to update
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Best performance (compared to the ISP)\\
+	\end{itemize}
+	
+	\subsubsection{Integrate Stream Processor}
+	We could use the two ISPs on the Jetson to do image processing.ISPs are meant for video processing and would provide the best performance. It would allow us to bypass the memory if we connect the camera directly to the camera port. This would require tuning the video processing operations to use the ISPs interface.\\
+			
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Fast		\item Can bypass memory buffers
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Not-entirely portable		\item Only one camera port\\
+	\end{itemize}
+	
+	\subsubsection{PCIe GPU}
+	The Tegra has a PCIe port that could be used to install a more powerful GPU for video processing. This could be a good option if the Jetson doesn?t have the required video processing power out of the box.
+		
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Could potentially be very powerful
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Uses more power\\
+	\end{itemize}
+	
+	\subsubsection{\textbf{Decision}}
+	We are going to use the GPU for our image processing. Use of the GPU is widely supported by applications and is easy to code and maintain. Also OpenCV on the Tegra Tk1 directly supports it, and many other choices have support for GPU processing. It will also be able to handle our requirement of 30 frame rates per second processing.
+	
+\subsection{Demo Interface}
+We will need a framework in order to display the video and user interface.\\
+	\subsubsection{QT Framework}
+	The QT framework is a stable library that provides user interface.It is cross-platform and has a simple API, but it is not a lightweight framework. Its ability to display video properly is undetermined.\\
+			
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Easy to use		\item Many features
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Bulky library		\item Not specifically for video streaming\\
+	\end{itemize}
+	
+	\subsubsection{OpenCV GUI}
+	OpenCV has various UI elements built in allowing for video display and user interaction. It is built into OpenCV and since we have decided to use OpenCV this makes it very simple.\\
+		
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Part of the OpenCV library		\item Easy to code
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Slow		\item Limited API		\item Limited functionality to control the look and feel\\
+	\end{itemize}
+	
+	\subsubsection{OpenGL}
+	We could use OpenGL to display the video and interface. This would give us full control over the look and feel and it would be very responsive.\\
+		
+	Benefits:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Fast		\item Portable		\item Powerful (full control of display)
+	\end{itemize}
+	
+	Drawbacks:
+	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
+		\item Long development time		\item Hard to maintain\\
+	\end{itemize}
+	
+	\subsubsection{\textbf{Decision}}
+	We will use the OpenCV built-in GUI for the interface, as it is simple to use if we are already using it for the memory manipulation and video processing. It could even be used in combination with other choices, and would still be a good choice as the API is easy to use and is large enough to have all the features we want.
