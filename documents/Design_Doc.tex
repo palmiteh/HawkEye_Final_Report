@@ -258,7 +258,7 @@ This section shows the high level organization of our software design.
 	The HawkEye video processing software needs to be able to handle various configurations of multiple camera inputs and produce multiple outputs, as well as performing multiple video processing algorithms. In order to do this, it needs to know what operations to perform in what order, and where to put the data. To do this, our software uses a tree-like data structure that connects the camera inputs, algorithm modules, and outputs. An input module definition specifies what modules a camera sends data to. Each of those modules then has its own output specification, which can either go to another algorithm module or an output module. \\
 	
 	\paragraph{Sample Entity Relationship Diagram}
-	\begin{figure}[!h] 
+	\begin{figure}[H] 
 		\centering
 		\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/ER_Diagram.png}  
 		\end{figure}
