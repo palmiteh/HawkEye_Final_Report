@@ -5,7 +5,7 @@ The HawkEye Vision System captures video from cameras, processes it using variou
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/CPU.png} 
-	\caption{CPU Operations: shows the functions of the different CPU threads}  
+	\caption{CPU Operation - showing the functions of the different CPU threads}  
 	\end{figure}
 	
 The GPU does all the heavy lifting in this program. It performs multiple video processing operations simultaneously. The GPU program is divided into several streams, each of which operates independently of the others, much like the multiple threads on a CPU. The Jetson allows multiple GPU kernels to run at the same time, as long as they are in different streams.
@@ -14,7 +14,7 @@ In the following diagram, each box represents a different GPU Kernel (with the e
 \begin{figure}[H] 
 	\centering
 	\includegraphics[width=0.6\textwidth,natwidth=610,natheight=642]{images/GPU.png}
-	\caption{GPU Operations: shows the functions of the different CUDA streams}  
+	\caption{GPU Operation - showing the functions of the different CUDA streams}  
 	\end{figure}
 	
 \subsection{Installation and Execution}
@@ -27,9 +27,9 @@ The example program we used at Expo has several controls.\\
 
 Camera Views:
 \begin{description}[leftmargin=2cm,labelindent=2cm]
-	\item[\[1\]] RGB Camera
-	\item[\[2\]] NIR Camera
-	\item[\[3\]] Zoom Camera\\
+	\item[{[1]}] RGB Camera
+	\item[{[2]}] NIR Camera
+	\item[{[3]}] Zoom Camera\\
 \end{description}
 
 Filters:
@@ -37,30 +37,30 @@ Filters:
 
 \item RGB and Zoom Camera Views:
 \begin{description}[leftmargin=2cm,labelindent=2cm]
-	\item[\[G\]] Enable edge detection
-	\item[\[F\]] Disable edge detection
-	\item[\[H\]] Decrease edge detection threshold (more edges)
-	\item[\[J\]] Increase edge detection threshold
-	\item[\[\{\]] Zoom out
-	\item[\[\}\]] Zoom in
+	\item[{[G]}] Enable edge detection
+	\item[{[F]}] Disable edge detection
+	\item[{[H]}] Decrease edge detection threshold (more edges)
+	\item[{[J]}] Increase edge detection threshold
+	\item[{[\{]}] Zoom out
+	\item[{[\}]}] Zoom in
 \end{description}
 
 \item RGB Only:
 \begin{description}[leftmargin=2cm,labelindent=2cm]
-	\item[\[Z\]] Enable zoom overlay
-	\item[\[X\]] Disable zoon overlay
+	\item[{[Z]}] Enable zoom overlay
+	\item[{[X]}]  Disable zoon overlay
 \end{description}
 
 \item IR Only:
 \begin{description}[leftmargin=2cm,labelindent=2cm]
-	\item[\[G\]] Decrease IR Threshold (brighter image)
-	\item[\[G\]] Increase IR Threshold (see only bright lights)\\
+	\item[{[A]}] Decrease IR Threshold (brighter image)
+	\item[{[S]}]  Increase IR Threshold (see only bright lights)\\
 \end{description}
 
 \end{itemize}
 
 Quit Programs:
 \begin{description}[leftmargin=2cm,labelindent=2cm]
-	\item[\[Q\]] Quit
+	\item[{[Q]}]  Quit
 \end{description}
 
