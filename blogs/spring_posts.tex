@@ -10,12 +10,12 @@ Additionally, we have begun development of a custom, entirely new line CUDA-base
 \item \textbf{Next Steps:} 
 Our line segment detection algorithm not only detects individual lines, but also rapidly finds intersecting line segments, which lays the groundwork for us to detect runways even without the runway lighting system. Our runway detector will look for long, narrow, roughly rectangular shapes (with compensation for obstructions and intersecting runways), and then identify markings within the runway, if possible (depending on the range and focus). It will then combine this information with any detected lighting patterns to determine the probability that it is in fact a runway. If a runway is detected, it will overlay the detected lines onto the screen, as well as an appropriately scaled directional indicator that shows the direction of the landing strip.
 \item \textbf{Parallell Processing:} 
-This week, we also created an entirely new data interchange format designed specifically for parallel processing multiple video streams. This class, called Frame, holds both the RGB and Mono images for an individual frame, keeps track of the time it was created and the time it is destroyed, and also synchronizes execution of GPU and CPU modules on the same data. CUDA has what are known as streams, which are independent execution queues for GPU kernels. They allow multiple kernels to run on the same GPU without waiting for each other or interfering with each other in any way. Each frame object has its own stream, which avoids congestion on the GPU. An example would be, if Frame1 is ready to be processed by the line segment detection algorithm, but Frame2 is currently being demosaiced, and they both utilized the default stream, Frame1 would have to wait until Frame2 is done with demosaicing before it could start the line segment detector. Furthermore, Frame2 might even start its line segment detector before Frame1's thread could wake up and begin execution, so Frame2 might even be processed before Frame1. With streams, this situation is avoided entirely because Frame1 can be processed while Frame2 is demosaicing, and is not blocked or delayed. This method resulted in much greater stability and an overall higher frame rate.?\\
+This week, we also created an entirely new data interchange format designed specifically for parallel processing multiple video streams. This class, called Frame, holds both the RGB and Mono images for an individual frame, keeps track of the time it was created and the time it is destroyed, and also synchronizes execution of GPU and CPU modules on the same data. CUDA has what are known as streams, which are independent execution queues for GPU kernels. They allow multiple kernels to run on the same GPU without waiting for each other or interfering with each other in any way. Each frame object has its own stream, which avoids congestion on the GPU. An example would be, if Frame1 is ready to be processed by the line segment detection algorithm, but Frame2 is currently being demosaiced, and they both utilized the default stream, Frame1 would have to wait until Frame2 is done with demosaicing before it could start the line segment detector. Furthermore, Frame2 might even start its line segment detector before Frame1's thread could wake up and begin execution, so Frame2 might even be processed before Frame1. With streams, this situation is avoided entirely because Frame1 can be processed while Frame2 is demosaicing, and is not blocked or delayed. This method resulted in much greater stability and an overall higher frame rate.\\
 \end{enumerate}
 
 \subsubsection{April 1, 2016}
 \paragraph{Meeting with Carlo}
-This week we met with Carlo and Weston to show them our progress. ?The meeting went well. We were able to demo the project so far, which they were impressed by. They had questions about how exactly we measured our frame rate. We were using software timers to test our system, which apparently can lie about the frame rate. They suggested that we use a high-speed camera and an LED to measure exactly how long it takes for the image to show up on the screen. We are currently working on using a GoPro for this as we do not have access to any higher speed cameras.
+This week we met with Carlo and Weston to show them our progress. The meeting went well. We were able to demo the project so far, which they were impressed by. They had questions about how exactly we measured our frame rate. We were using software timers to test our system, which apparently can lie about the frame rate. They suggested that we use a high-speed camera and an LED to measure exactly how long it takes for the image to show up on the screen. We are currently working on using a GoPro for this as we do not have access to any higher speed cameras.
 \par
 We also talked about our display at expo. Carlo and Weston said that creating a scaled air strip would be a good idea. They suggested putting NIR (Near Infra-Red) LEDs on the air strip and detecting them with our NIR camera to show off an asymmetrical camera system, which is an important part of arial vision systems.
 \par
@@ -29,7 +29,7 @@ This week, we've been working on creating a runway for the model for expo. We're
 \par
 We also met with Xinze and described our progress so far, along with our meeting last week.
 \par
-We also decided that we're going to use a GoPro, if we can,? to measure the true latency of our system.\\
+We also decided that we're going to use a GoPro, if we can obtain one, to measure the true latency of our system.\\
 
 \subsubsection{April 15, 2016}
 \paragraph{Gearing Up}
@@ -43,7 +43,7 @@ This week we sent out a lot of emails. A bit of the background processes in the 
 \item A zoom lens to see the letters on our model runway.
 \end{itemize}
 
-We've almost finished creating the model runway and it looks great. We still need to add the center lines to it. Also we've acquired the GoPro from Kevin and got it working.? We might still need an SD card expander to read from the GoPro, but I've got one.\\
+We've almost finished creating the model runway and it looks great. We still need to add the center lines to it. Also we've acquired the GoPro from Kevin and got it working. We might still need an SD card expander to read from the GoPro, but I've got one.\\
 
 \subsubsection{April 22, 2016}
 \paragraph{Expo Poster Final Touches}
@@ -51,11 +51,11 @@ At the start of this week we acquired a GoPro from Kevin to use for testing the 
 \par
 We also created an overlay filter to counter the parallax effect for our live demonstration at the engineering expo. This visually aligns the inputs from the two cameras so that the runway appears in the same location on both images. Shifting the pixels of one image to match the other image is how this is . Our demonstration will combine the image of a standard camera to identify the runway during daylight with our NIR camera to detect the approach lights when it is dark. The overlay filter will combine the two camera's images and properly align them to get a clear output image.
 \par
-We also have ordered the NIR LEDs, and received the camera spacers and the NIR filter we ordered last. We are still trying to get in contact with Carlo to receive the zoom lens. This lens will allow use to identify the runway numbers better by zooming in on them whenever it is needed.\\?
+We also have ordered the NIR LEDs, and received the camera spacers and the NIR filter we ordered last. We are still trying to get in contact with Carlo to receive the zoom lens. This lens will allow use to identify the runway numbers better by zooming in on them whenever it is needed.\\
 
 \subsubsection{April 29, 2016}
 \paragraph{Minor Tweaks and Improvements}
-The logistics for this week consisted of a meeting with Xinze to discuss our current progress and/or any bugs we are having with our project (we currently have no issues), and also about the submission of the poster to the library for printing. ?
+The logistics for this week consisted of a meeting with Xinze to discuss our current progress and/or any bugs we are having with our project (we currently have no issues), and also about the submission of the poster to the library for printing.
 \par
 We also acquired some LED strip lights from Kevin to use as our approach lights on our runway. We are planning to operate them using a Raspberry Pi. We have been in contact with Carlo about the zoom lens and he is mailing that to Hailey's home address, that way, next week, we can begin further development of the zoom functionality for our demonstration. 
 \par
@@ -67,11 +67,11 @@ On the development side for this week, we developed a new, cleaner version of ou
 \paragraph{Spring Midterm Progress Report}
 This week mainly consisted of working on midterm progress/release report and presentation. We have now finished both with only a few minor touches to the video to make and turning it all in. Last week we had divided up all the sections that needed to be added and/or changed to the document. That organization made this report very easy to construct and were able to work on it without having to meet a bunch. We did get a room in the library in order to record using Hailey's headset so that the audio for our presentation was all the same and very clear. 
 \par
-?We also received the zoom lens from Carlo this week and will begin implementing our full demonstration for the Engineering Expo next week.\\ ??
+We also received the zoom lens from Carlo this week and will begin implementing our full demonstration for the Engineering Expo next week.\\
 
 \subsubsection{May 13,2016}
 \paragraph{Preparing for Expo}
-This week we were each working independently to ensure that expo goes smoothly?.
+This week we were each working independently to ensure that expo goes smoothly.
 \par
 Some of the things we did this week were:
 \begin{itemize}[leftmargin=2cm,labelindent=2cm]
@@ -92,7 +92,7 @@ We've got some follow ups with our client, but besides that we simply have the f
 \paragraph{Engineering Expo Results}
 This week during class, Kevin recapped how the engineering expo had gone all for the computer science department. We found out that NVIDIA was happy about the use of the Jetson TX1 in our project and the capabilities we were able to achieve from it. We also found out that we were voted first place out of all the computer science projects and received a gift bag as our reward. 
 \par
-?Also this week the requirements for the final report and presentation were released. Our group has looked over the requirements and are planning to begin working on it next week.\\?
+Also this week the requirements for the final report and presentation were released. Our group has looked over the requirements and are planning to begin working on it next week.\\
 
 \subsubsection{June 3, 2016}
 \paragraph{Final Report}

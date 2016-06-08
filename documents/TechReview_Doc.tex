@@ -1,14 +1,20 @@
 \subsection{Camera Interface (Hardware Level)}
 There are three different camera interfaces available on the Jetson development board. Each one offers a different set of benefits and challenges.\\
 	\subsubsection{USB 3.0}
-	USB 3.0 is a high-speed plug and play interface that offers a theoretical 384 MB/s data throughput. One USB 3.0 port is available on the Jetson, but 		additional ports can be added using the mini PCI Express expansion slot.\\	Benefits:
+	USB 3.0 is a high-speed plug and play interface that offers a theoretical 384 MB/s data throughput. One USB 3.0 port is available on the Jetson, but 		additional ports can be added using the mini PCI Express expansion slot.\\
+
+	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Availability of USB 3.0 cameras		\item Plug and play, with no camera configuration
+		\item Availability of USB 3.0 cameras
+		\item Plug and play, with no camera configuration
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Jetson onboard USB 3.0 does not meet the USB 3.0 specification for bandwidth		\item Some cameras do not have USB 3.0 drivers for ARM		\item USB 3.0 only supports one camera per port due to bandwidth limits		\item Increased cost due to board expansion\\
+		\item Jetson onboard USB 3.0 does not meet the USB 3.0 specification for bandwidth
+		\item Some cameras do not have USB 3.0 drivers for ARM
+		\item USB 3.0 only supports one camera per port due to bandwidth limits
+		\item Increased cost due to board expansion\\
 	\end{itemize}
 	
 	\subsubsection{Gigabit Ethernet}
@@ -16,12 +22,15 @@ There are three different camera interfaces available on the Jetson development 
 	
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item All gigabit cameras use a standardized interface and require no driver		\item More high quality cameras available than the USB 3.0 offers		\item Simple configuration with video4linux
+		\item All gigabit cameras use a standardized interface and require no driver
+		\item More high quality cameras available than the USB 3.0 offers
+		\item Simple configuration with video4linux
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Most cameras require external power supplies		\item Gigabit cameras typically cost more than the USB 3.0 alternatives\\
+		\item Most cameras require external power supplies
+		\item Gigabit cameras typically cost more than the USB 3.0 alternatives\\
 	\end{itemize}
 	
 	\subsubsection{MIPI Camera Interface}
@@ -29,12 +38,17 @@ There are three different camera interfaces available on the Jetson development 
 		
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item High speed, built in interface		\item Low power consumption		\item Lower latency because the video processing can be done before buffering
+		\item High speed, built in interface
+		\item Low power consumption
+		\item Lower latency because the video processing can be done before buffering
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Very limited number of cameras supported		\item Specific to the Tegra K1, making it not portable		\item Increased hardware complexity		\item Increased software complexity due to lack of standardized drivers\\
+		\item Very limited number of cameras supported
+		\item Specific to the Tegra K1, making it not portable
+		\item Increased hardware complexity
+		\item Increased software complexity due to lack of standardized drivers\\
 	\end{itemize}
 	
 	\subsubsection{Decision}
@@ -48,38 +62,48 @@ We will have a framework for streaming the video from different components (came
 		
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Able to write scripts using python		\item Can use OpenCL to take advantage of the GPU
+		\item Able to write scripts using python
+		\item Can use OpenCL to take advantage of the GPU
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Hides functionality		\item Questionable performance\\
+		\item Hides functionality
+		\item Questionable performance\\
 	\end{itemize}
 	
 	\subsubsection{Direct Memory Handling}
-	We could handle the video stream ourselves on top of v4l provided by the Jetson, but would require some low-level knowledge of the Jetson?s hardware. It would allow for more control over the video stream and give better performance.\\
+	We could handle the video stream ourselves on top of v4l provided by the Jetson, but would require some low-level knowledge of the Jetson's hardware. It would allow for more control over the video stream and give better performance.\\
 	
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Fast performance		\item Full control of operations
+		\item Fast performance
+		\item Full control of operations
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Requires low-level knowledge of the Jetson architecture		\item Complex, which make it much easier to develop bugs		\item Not portable to other boards\\
+		\item Requires low-level knowledge of the Jetson architecture
+		\item Complex, which make it much easier to develop bugs
+		\item Not portable to other boards\\
 	\end{itemize}
 	
 	\subsubsection{Gstreamer}
-	We could use Gstreamer, a free library with video functionality.Gstreamer is widely used as an industry standard, and works on different architectures. If we choose to use Gstreamer we are limited to the API it provides, which is pretty limited because it?s meant for video conversion.\\
+	We could use Gstreamer, a free library with video functionality.
+Gstreamer is widely used as an industry standard, and works on different architectures. If we choose to use Gstreamer we are limited to the API it provides, which is pretty limited because it is meant for video conversion.\\
 			
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Lightweight		\item Portable		\item Scriptable		\item Easy pipeline-design
+		\item Lightweight
+		\item Portable
+		\item Scriptable
+		\item Easy pipeline-design
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Questionable performance		\item May not be able to make use of hardware components\\
+		\item Questionable performance
+		\item May not be able to make use of hardware components\\
 	\end{itemize}
 	
 	\subsubsection{Decision}
@@ -92,7 +116,9 @@ In order to demonstrate the processing power of the Jetson Tk1, we are going to 
 		
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Easy to use		\item Easy to maintain		\item Easy to update
+		\item Easy to use
+		\item Easy to maintain
+		\item Easy to update
 	\end{itemize}
 	
 	Drawbacks:
@@ -101,20 +127,23 @@ In order to demonstrate the processing power of the Jetson Tk1, we are going to 
 	\end{itemize}
 	
 	\subsubsection{Integrate Stream Processor}
-	We could use the two ISPs on the Jetson to do image processing.ISPs are meant for video processing and would provide the best performance. It would allow us to bypass the memory if we connect the camera directly to the camera port. This would require tuning the video processing operations to use the ISPs interface.\\
+	We could use the two ISPs on the Jetson to do image processing.
+ISPs are meant for video processing and would provide the best performance. It would allow us to bypass the memory if we connect the camera directly to the camera port. This would require tuning the video processing operations to use the ISPs interface.\\
 			
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Fast		\item Can bypass memory buffers
+		\item Fast
+		\item Can bypass memory buffers
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Not-entirely portable		\item Only one camera port\\
+		\item Not-entirely portable
+		\item Only one camera port\\
 	\end{itemize}
 	
 	\subsubsection{PCIe GPU}
-	The Tegra has a PCIe port that could be used to install a more powerful GPU for video processing. This could be a good option if the Jetson doesn?t have the required video processing power out of the box.
+	The Tegra has a PCIe port that could be used to install a more powerful GPU for video processing. This could be a good option if the Jetson does not have the required video processing power out of the box.
 		
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
@@ -132,16 +161,19 @@ In order to demonstrate the processing power of the Jetson Tk1, we are going to 
 \subsection{Demo Interface}
 We will need a framework in order to display the video and user interface.\\
 	\subsubsection{QT Framework}
-	The QT framework is a stable library that provides user interface.It is cross-platform and has a simple API, but it is not a lightweight framework. Its ability to display video properly is undetermined.\\
+	The QT framework is a stable library that provides user interface.
+It is cross-platform and has a simple API, but it is not a lightweight framework. Its ability to display video properly is undetermined.\\
 			
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Easy to use		\item Many features
+		\item Easy to use
+		\item Many features
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Bulky library		\item Not specifically for video streaming\\
+		\item Bulky library
+		\item Not specifically for video streaming\\
 	\end{itemize}
 	
 	\subsubsection{OpenCV GUI}
@@ -149,12 +181,15 @@ We will need a framework in order to display the video and user interface.\\
 		
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Part of the OpenCV library		\item Easy to code
+		\item Part of the OpenCV library
+		\item Easy to code
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Slow		\item Limited API		\item Limited functionality to control the look and feel\\
+		\item Slow
+		\item Limited API
+		\item Limited functionality to control the look and feel\\
 	\end{itemize}
 	
 	\subsubsection{OpenGL}
@@ -162,12 +197,15 @@ We will need a framework in order to display the video and user interface.\\
 		
 	Benefits:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Fast		\item Portable		\item Powerful (full control of display)
+		\item Fast
+		\item Portable
+		\item Powerful (full control of display)
 	\end{itemize}
 	
 	Drawbacks:
 	\begin{itemize}[leftmargin=2cm,labelindent=2cm]
-		\item Long development time		\item Hard to maintain\\
+		\item Long development time
+		\item Hard to maintain\\
 	\end{itemize}
 	
 	\subsubsection{Decision}

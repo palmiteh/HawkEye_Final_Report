@@ -70,7 +70,7 @@ We are focusing on getting two cameras' output displayed before moving on to fix
 
 \subsubsection{January 29, 2016}
 \paragraph{PointGrey Camera on Point}
-Last week we were able to get the ?camera that is onboard the Jetson Tx1 to display an image at 1080p and 30fps. We were having much more difficulty with the USB 3.0, PointGrey, camera that Rockwell Collins had supplied for us, but this week we managed to get it to work. ?
+Last week we were able to get the camera that is onboard the Jetson TX1 to display an image at 1080p and 30fps. We were having much more difficulty with the USB 3.0, PointGrey, camera that Rockwell Collins had supplied for us, but this week we managed to get it to work.
 \par
 We were missing two big elements as to why we had so much trouble with getting a video output from it last week. We recompiled the Linux kernel to increase the USB buffer size to accommodate higher resolution image capture from the PointGrey camera. We also acquired code from PointGrey to interface between the proprietary camera API and openCV.
 \par
@@ -82,9 +82,9 @@ In class this week we went over the requirements needed for our Alpha release, w
 \paragraph{Modularity and Multiple Cameras}
 A major goal for this week was to get a second camera. This would allow us to be able to begin furthering our software to handle processing of multiple video streams into one output. Multiple cameras are a requirement that is needed for us to able to have a complete project at Beta release, but something we wanted to be able to at least support with our Alpha release. We were able to get in contact with Carlo, and set-up a meeting allow us to (very generously) borrow two more PointGrey cameras with additional lenses as well. On Thursday Hailey drove up to Rockwell Collins in Willsonville to have an informal meeting/lunch with both Carlo and Weston to pick up the cameras.
 \par
-Last weekend Ryan got a full modular system built within our software. ?Our software reads a JSON configuration file to set-up the modules??. This allows for more flexibility with the use of different cameras and their software. It also gives us the ability to different filter modules and only apply the ones we want a specific time. It could handle more flexibility with use of different types of cameras only being used at specific times or for specific reasons. For example, a long range camera may only be activated when needed to find the runway. It could then be turned on and processing when needed, but deactivated to not decrease the performance metrics when not needed. 
+Last weekend Ryan got a full modular system built within our software. Our software reads a JSON configuration file to set-up the modules. This allows for more flexibility with the use of different cameras and their software. It also gives us the ability to different filter modules and only apply the ones we want a specific time. It could handle more flexibility with use of different types of cameras only being used at specific times or for specific reasons. For example, a long range camera may only be activated when needed to find the runway. It could then be turned on and processing when needed, but deactivated to not decrease the performance metrics when not needed. 
 \par
-At the beginning of the week, the modular system was able to output a static image which allowed us to demonstrate that the system was working. We then created a module to handle the PointGrey camera software. This allowed us to get two of the cameras up and running with one video output. We haven't gotten the USB PCIe card yet, so we can't actually implement dual cameras over USB3 yet, but were able to run one on USB 3.0 and the other on USB 2.0.? Even though one of the cameras was being ran with USB 2.0, we were still able to capture decent frame rate and are below our required latency.? This weekend we will be fine tuning some of the video capabilities for our Alpha release presentation.
+At the beginning of the week, the modular system was able to output a static image which allowed us to demonstrate that the system was working. We then created a module to handle the PointGrey camera software. This allowed us to get two of the cameras up and running with one video output. We haven't gotten the USB PCIe card yet, so we can't actually implement dual cameras over USB3 yet, but were able to run one on USB 3.0 and the other on USB 2.0. Even though one of the cameras was being ran with USB 2.0, we were still able to capture decent frame rate and are below our required latency. This weekend we will be fine tuning some of the video capabilities for our Alpha release presentation.
 \par
 This week we also began the outline of our written midterm progress report and will hopefully have a solid rough draft for our meeting with Xinze on Monday.\\
 
@@ -104,7 +104,7 @@ We also showed our client our video presentation and he approved of our progress
 
 \subsubsection{February 26, 2016}
 \paragraph{Technical Stuff}
-This week, we've been trying to make the visual frame rate more smooth on the Jetson. ?While we're capturing and processing the images, we have the required frame rate, but, display to the screen is very slow. Our metrics claim that we can get 30fps on the screen, but the resulting visual display is obviously not 30fps.
+This week, we've been trying to make the visual frame rate more smooth on the Jetson. While we're capturing and processing the images, we have the required frame rate, but, display to the screen is very slow. Our metrics claim that we can get 30fps on the screen, but the resulting visual display is obviously not 30fps.
 \par
 One solution we have to this problem is to use a low level API to display the images. We are planning to leave the capture and processing system in place, but simply replace the way we display the images, giving us more control over the display process. Our plan for replacement is to use GLUT which is a window system based on OpenGL. We have setup this replacement but haven't implemented the benefits of using GLUT which is zero copy. This means writing the camera images directly to a buffer that is read by the GPU. because the GPU and the CPU share memory, this is possible.
 \par
@@ -126,7 +126,7 @@ We've also been having strange inconsistencies in the state of the cameras betwe
 
 \subsubsection{March 11, 2016}
 \paragraph{Everything's Working} 
-This week we completed the requirements listed in our design document. ?We currently have 2 cameras streaming at 33 frames per second and 3 cameras running at 31 frames per second over USB3. We also got one camera running at around 100 frames per second but this program is unstable and crashes more than our program that runs at 30 frames per second.
+This week we completed the requirements listed in our design document. We currently have 2 cameras streaming at 33 frames per second and 3 cameras running at 31 frames per second over USB3. We also got one camera running at around 100 frames per second but this program is unstable and crashes more than our program that runs at 30 frames per second.
 \par
 We are planning to move forward using this program that grabs and displays frames at 100 fps, working out the bugs as we go along. This program can run at 100 fps because we spawn different threads for converting the color space from raw to RGB. Before, this was being done in the same thread as the capture thread which delayed the frame rate. Spawning new threads for processing had sped up this process.
 \par
