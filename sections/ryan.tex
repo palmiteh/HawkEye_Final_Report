@@ -1,6 +1,20 @@
 \subsubsection{What technical information did you learn?}
+Through this project, I learned how to program NVIDIA GPUs to do anything I want them to. I learned a lot about programming optimizations, especially avoiding memory reads and writes, and maximizing the utilization of memory caches. I also learned many new things about video processing, including various methods of edge and object detection, as well as how physical optics such as focus and brightness affect programming computer vision algorithms.\par
+Another thing I learned a lot about was interfacing with proprietary hardware. We used Point Grey cameras for our project, which required us to work around a proprietary hardware interface API with little to no documentation. In order to get some of our stuff to work, we actually had to dig through the header files for the camera API and basically guess and check, since most of the functions did not have any documentation whatsoever. For example, the ability to capture video directly into user buffers was a breakthrough which allowed us to avoid copying data from the CPU to the GPU. \par
+One important technical skill I learned from this project is the ability to combine different libraries that do the same thing. In pursuit of performance, we integrated OpenCV with CUDA, OpenGL with GLUT, and SDL, with all of them being options.
+\par  		The biggest takeaway for me was learning CUDA, it is an extremely versatile programming interface for GPUs and can be used for numerous other things besides graphics. When I started this project, I barely knew what CUDA was. By the end of the project, I became very experienced with it and am actually teaching others to use it in other projects.\\
+
 \subsubsection{What non-technical information did you learn?}
+As a result of our choice to make our project aerospace themed, I learned a lot about aviation markings, the purpose of different kinds of runway lighting, and the challenges that pilots face landing in inclement weather. We used the official FAA documentation for runway markings and lighting to design our runway model and make it as realistic as possible.\\
+
 \subsubsection{What have you learned about project work?}
+This project taught me the value of persistence and flexibility. Our final product was completely different from how we originally designed it, and we had a number of changes along the way. At several points, we had to completely rewrite major parts of the program to increase performance and decrease complexity. Being able to detach from specific design concepts and explore alternatives has been the most valuable skill I have learned.\\
+
 \subsubsection{What have you learned about project management?}
+In order to produce the best possible product, it was necessary to separate tasks according to individual areas of expertise. By allowing each person to focus on their strengths, we were able to get more done in the same amount of time. This enabled us to exceed our requirements and develop different and diverse skills.\\
+
 \subsubsection{What have you learned about working in teams?}
+One thing I learned from this is the importance of setting objectives and creating minutes before meetings. A lot of our meetings lacked direction and were only marginally productive, as we spent a lot of time getting on tangents and not planning out our work. As a result of this, a lot of our work was very disconnected and disorganized. Towards the end of the year we began planning our meetings out better and this caused us to stay on topic and get a lot more done.\\
+
 \subsubsection{If you could do it all over, what would you do differently?}
+I would have liked to have better divided up the code and created predefined interfaces/function prototypes so that we could have divided up the programming work better. One difficulty we had was continually changing aspects of the program architecture and it caused issues as we were all working separately. If we had explicit interfaces between different parts and well defined goals, we would have been able to be more productive as a team.
