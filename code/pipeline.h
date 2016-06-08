@@ -90,7 +90,7 @@ public:
   }
   
   virtual void pipeline(Pixel *output,int pipeline_no){
-    printf("FUCK");;
+    printf("hello");;
   }
   
   void _pipeline(){

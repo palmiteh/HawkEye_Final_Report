@@ -37,7 +37,7 @@ There are three different camera interfaces available on the Jetson development 
 		\item Very limited number of cameras supported		\item Specific to the Tegra K1, making it not portable		\item Increased hardware complexity		\item Increased software complexity due to lack of standardized drivers\\
 	\end{itemize}
 	
-	\subsubsection{\textbf{Decision}}
+	\subsubsection{Decision}
 	We decided to use the USB 3.0 cameras because of the availability of low-cost high-quality cameras. Also, Rockwell Collins has several USB cameras they would like us to use. For our customer, it will be best to base the system around the USB 3.0 option. This may require adding a USB expansion card, but the other advantages of using USB 3.0 make it the first choice for camera connection.
 	
 \subsection{Video Subsystem (Software Level)}
@@ -82,7 +82,7 @@ We will have a framework for streaming the video from different components (came
 		\item Questionable performance		\item May not be able to make use of hardware components\\
 	\end{itemize}
 	
-	\subsubsection{\textbf{Decision}}
+	\subsubsection{Decision}
 	We will start developing with OpenCV, but if the performance is to slow we may switch to a different option. Video4Linux may be enough to easily move the stream to different components of the Jetson.
 	
 \subsection{Image Processing}
@@ -126,7 +126,7 @@ In order to demonstrate the processing power of the Jetson Tk1, we are going to 
 		\item Uses more power\\
 	\end{itemize}
 	
-	\subsubsection{\textbf{Decision}}
+	\subsubsection{Decision}
 	We are going to use the GPU for our image processing. Use of the GPU is widely supported by applications and is easy to code and maintain. Also OpenCV on the Tegra Tk1 directly supports it, and many other choices have support for GPU processing. It will also be able to handle our requirement of 30 frame rates per second processing.
 	
 \subsection{Demo Interface}
@@ -170,5 +170,5 @@ We will need a framework in order to display the video and user interface.\\
 		\item Long development time		\item Hard to maintain\\
 	\end{itemize}
 	
-	\subsubsection{\textbf{Decision}}
+	\subsubsection{Decision}
 	We will use the OpenCV built-in GUI for the interface, as it is simple to use if we are already using it for the memory manipulation and video processing. It could even be used in combination with other choices, and would still be a good choice as the API is easy to use and is large enough to have all the features we want.
