@@ -1,0 +1,33 @@
+Unless otherwise specified, all code is in /HawkEyed_Video/HawkEye_2.0
+
+The following code is the buffered camera system that is used in our final product.
+The "Frame" type is a class we designed that maintains the data until it is done being used
+and then releases it to be captured into again.
+
+//include camera_2.0.cpp
+
+
+
+This code is the edge detection algorithm used in the demo. It uses a pixel and 3 of its neighbors
+to determine the direction and magnitude of a change in brightness. This example shows how to develop a
+CUDA kernel and some of the optimizations we used in order to reduce latency.
+
+//include newfilters/edge_overlay.cu
+
+This code is the main program for our demonstration application, which was used for the benchmarking
+and at expo. It shows how different kernels can be strung together via streams, and the operations changed during
+program execution.
+
+//include glut_output.cpp
+
+This code is our pipeline system, which was developed and used to achieve even lower latency  for our software, but 
+was not included in the final version because of stability issues, but would be the preferred method for future development.
+It demonstrates a more effective way to process multiple frames at the same time, and optimizes to only grab the most
+recent frames instead of processing all frames in order. It allows the programmer to avoid directly having to implement 
+multithreaded, multi-stream processing, and instead focus on just the algorithm development.
+
+
+//include HawkEye_Release/pipeline.h
+
+
+
